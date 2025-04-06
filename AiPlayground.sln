@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetRomApp", "NetRomApp\NetRomApp.csproj", "{600214BE-B764-4F80-9D2D-0AFF3D6F2778}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AiPlayground", "AiPlayground\AiPlayground.csproj", "{600214BE-B764-4F80-9D2D-0AFF3D6F2778}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AiPlayground.DataAccess", "AiPlayground.DataAccess\AiPlayground.DataAccess.csproj", "{3D26C0A1-E56F-47E7-B938-7A87FF955E0C}"
 EndProject

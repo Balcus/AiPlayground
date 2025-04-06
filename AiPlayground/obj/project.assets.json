@@ -487,11 +487,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/balcus/RiderProjects/WebApplication1/NetRomApp/NetRomApp.csproj",
-      "projectName": "NetRomApp",
-      "projectPath": "/home/balcus/RiderProjects/WebApplication1/NetRomApp/NetRomApp.csproj",
+      "projectUniqueName": "/home/balcus/RiderProjects/WebApplication1/AiPlayground/AiPlayground.csproj",
+      "projectName": "AiPlayground",
+      "projectPath": "/home/balcus/RiderProjects/WebApplication1/AiPlayground/AiPlayground.csproj",
       "packagesPath": "/home/balcus/.nuget/packages/",
-      "outputPath": "/home/balcus/RiderProjects/WebApplication1/NetRomApp/obj/",
+      "outputPath": "/home/balcus/RiderProjects/WebApplication1/AiPlayground/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/balcus/.nuget/NuGet/NuGet.Config"
