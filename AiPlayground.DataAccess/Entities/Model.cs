@@ -1,5 +1,4 @@
 namespace AiPlayground.DataAccess.Entities;
-// TODO: add the other models and configurations
 public class Model
 {
     public int Id { get; set; }
@@ -8,5 +7,5 @@ public class Model
 
     // why is this virtual ??
     public virtual Platform Platform { get; set; } = null!;
-    public Run Run { get; set; } = null!;
+    public virtual Run Run { get; set; } = null!;
 }
