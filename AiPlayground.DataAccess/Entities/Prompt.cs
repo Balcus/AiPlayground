@@ -8,7 +8,7 @@ public class Prompt
     public string SystemMsg { get; set; } = string.Empty;
     public string ExpectedResponse { get; set; } = string.Empty;
     
-    public int ScopeId;
+    public int ScopeId { get; set; }
 
     public virtual Scope Scope { get; set; } = null!;
     public virtual Run Run { get; set; } = null!;

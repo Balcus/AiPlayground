@@ -8,7 +8,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f5778b4e-d210-4141-9758-54d02efed148" name="Changes" comment="" />
+    <list default="true" id="f5778b4e-d210-4141-9758-54d02efed148" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/AiPlayground/bin/Debug/net8.0/AiPlayground.dll" beforeDir="false" afterPath="$PROJECT_DIR$/AiPlayground/bin/Debug/net8.0/AiPlayground.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AiPlayground/bin/Debug/net8.0/AiPlayground.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/AiPlayground/bin/Debug/net8.0/AiPlayground.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AiPlayground/bin/Debug/net8.0/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/AiPlayground/bin/Debug/net8.0/appsettings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AiPlayground/obj/Debug/net8.0/AiPlayground.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/AiPlayground/obj/Debug/net8.0/AiPlayground.AssemblyInfo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AiPlayground/obj/Debug/net8.0/AiPlayground.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/AiPlayground/obj/Debug/net8.0/AiPlayground.AssemblyInfoInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AiPlayground/obj/Debug/net8.0/apphost" beforeDir="false" afterPath="$PROJECT_DIR$/AiPlayground/obj/Debug/net8.0/apphost" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AiPlayground/obj/Debug/net8.0/staticwebassets.build.json" beforeDir="false" afterPath="$PROJECT_DIR$/AiPlayground/obj/Debug/net8.0/staticwebassets.build.json" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -20,6 +28,11 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/AiPlayground/Program.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/AiPlayground/appsettings.Development.json" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/AiPlayground/appsettings.json" root0="FORCE_HIGHLIGHTING" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 1
 }</component>
@@ -30,7 +43,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    ".NET Launch Settings Profile.NetRomApp: http.executor": "Debug",
+    ".NET Launch Settings Profile.NetRomApp: http.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
     "node.js.detected.package.eslint": "true",
@@ -85,7 +98,7 @@
       <workItem from="1743763012412" duration="1732000" />
       <workItem from="1743781087726" duration="1925000" />
       <workItem from="1743783825301" duration="702000" />
-      <workItem from="1743951203425" duration="6048000" />
+      <workItem from="1743951203425" duration="6249000" />
     </task>
     <servers />
   </component>
