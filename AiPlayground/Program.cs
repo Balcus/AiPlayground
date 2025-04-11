@@ -1,11 +1,16 @@
+using AiPlayground.BusinessLogic.Interfaces;
+using AiPlayground.BusinessLogic.Services;
 using AiPlayground.DataAccess;
-using Microsoft.EntityFrameworkCore;
+using AiPlayground.DataAccess.Entities;
+using AiPlayground.DataAccess.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddScoped<IRepository<Scope>, BaseRepository<Scope>>();
+builder.Services.AddScoped<IScopeService, ScopeService>();
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 

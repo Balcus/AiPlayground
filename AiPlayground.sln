@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AiPlayground", "AiPlaygroun
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AiPlayground.DataAccess", "AiPlayground.DataAccess\AiPlayground.DataAccess.csproj", "{3D26C0A1-E56F-47E7-B938-7A87FF955E0C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AiPlayground.BusinessLogic", "AiPlayground.BusinessLogic\AiPlayground.BusinessLogic.csproj", "{7F365062-77F9-4770-B9AB-2269B0ED8DDD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{3D26C0A1-E56F-47E7-B938-7A87FF955E0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3D26C0A1-E56F-47E7-B938-7A87FF955E0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3D26C0A1-E56F-47E7-B938-7A87FF955E0C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F365062-77F9-4770-B9AB-2269B0ED8DDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F365062-77F9-4770-B9AB-2269B0ED8DDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F365062-77F9-4770-B9AB-2269B0ED8DDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F365062-77F9-4770-B9AB-2269B0ED8DDD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

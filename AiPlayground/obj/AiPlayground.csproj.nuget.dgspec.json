@@ -4,6 +4,68 @@
     "/home/balcus/RiderProjects/WebApplication1/AiPlayground/AiPlayground.csproj": {}
   },
   "projects": {
+    "/home/balcus/RiderProjects/WebApplication1/AiPlayground.BusinessLogic/AiPlayground.BusinessLogic.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/balcus/RiderProjects/WebApplication1/AiPlayground.BusinessLogic/AiPlayground.BusinessLogic.csproj",
+        "projectName": "AiPlayground.BusinessLogic",
+        "projectPath": "/home/balcus/RiderProjects/WebApplication1/AiPlayground.BusinessLogic/AiPlayground.BusinessLogic.csproj",
+        "packagesPath": "/home/balcus/.nuget/packages/",
+        "outputPath": "/home/balcus/RiderProjects/WebApplication1/AiPlayground.BusinessLogic/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/balcus/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "/home/balcus/RiderProjects/WebApplication1/AiPlayground.DataAccess/AiPlayground.DataAccess.csproj": {
+                "projectPath": "/home/balcus/RiderProjects/WebApplication1/AiPlayground.DataAccess/AiPlayground.DataAccess.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/8.0.408/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
     "/home/balcus/RiderProjects/WebApplication1/AiPlayground.DataAccess/AiPlayground.DataAccess.csproj": {
       "version": "1.0.0",
       "restore": {
@@ -110,6 +172,9 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
+              "/home/balcus/RiderProjects/WebApplication1/AiPlayground.BusinessLogic/AiPlayground.BusinessLogic.csproj": {
+                "projectPath": "/home/balcus/RiderProjects/WebApplication1/AiPlayground.BusinessLogic/AiPlayground.BusinessLogic.csproj"
+              },
               "/home/balcus/RiderProjects/WebApplication1/AiPlayground.DataAccess/AiPlayground.DataAccess.csproj": {
                 "projectPath": "/home/balcus/RiderProjects/WebApplication1/AiPlayground.DataAccess/AiPlayground.DataAccess.csproj"
               }
@@ -134,10 +199,6 @@
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
               "version": "[8.0.14, )"
-            },
-            "Microsoft.EntityFrameworkCore": {
-              "target": "Package",
-              "version": "[8.0.15, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
