@@ -1,3 +1,5 @@
+using System.Collections.ObjectModel;
+
 namespace AiPlayground.DataAccess.Entities;
 
 public class Prompt
@@ -11,5 +13,5 @@ public class Prompt
     public int ScopeId { get; set; }
 
     public virtual Scope Scope { get; set; } = null!;
-    public virtual Run Run { get; set; } = null!;
+    public ICollection<Run> Runs { get; set; } = new HashSet<Run>();
 }

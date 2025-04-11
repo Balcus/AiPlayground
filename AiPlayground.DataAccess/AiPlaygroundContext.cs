@@ -6,6 +6,10 @@ namespace AiPlayground.DataAccess;
 
 public class AiPlaygroundContext : DbContext
 {
+    public AiPlaygroundContext()
+    {
+        
+    }
     public AiPlaygroundContext(DbContextOptions<AiPlaygroundContext> options) : base(options)
     {
         
@@ -28,8 +32,9 @@ public class AiPlaygroundContext : DbContext
         new PromptConfiguration().Configure(modelBuilder.Entity<Prompt>());
     }
 
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseSqlServer("Server=localhost;Database=AiPlayground;User Id=sa;Password=0.-Remy-.0;Encrypt=True;TrustServerCertificate=True;");
+        optionsBuilder.UseSqlServer("Server=localhost,1433;Database=AiPlayground;User Id=sa;Password=0.-Remy-.0;Encrypt=True;TrustServerCertificate=True;");
     }
 }
