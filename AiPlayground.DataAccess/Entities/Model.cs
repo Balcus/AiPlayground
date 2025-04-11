@@ -1,3 +1,5 @@
+using System.Collections.ObjectModel;
+
 namespace AiPlayground.DataAccess.Entities;
 public class Model
 {
@@ -7,5 +9,5 @@ public class Model
 
     // why is this virtual ??
     public virtual Platform Platform { get; set; } = null!;
-    public virtual Run Run { get; set; } = null!;
+    public ICollection<Run> Runs { get; set; } = new HashSet<Run>();
 }
