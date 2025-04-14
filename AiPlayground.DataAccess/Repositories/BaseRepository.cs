@@ -1,6 +1,6 @@
 
+using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore;
-// TODO : Unit of work pattern
 namespace AiPlayground.DataAccess.Repositories;
 
 public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : class
@@ -18,9 +18,13 @@ public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : clas
         {
             return await _context.Set<TEntity>().FindAsync(id);
         }
+        catch (DbUpdateException e)
+        {
+            throw new Exception($"Database error while retrieving {typeof(TEntity).Name} with ID {id}: {e.InnerException?.Message ?? e.Message}");
+        }
         catch (Exception e)
         {
-            throw new Exception("error");
+            throw new Exception($"Failed to retrieve {typeof(TEntity).Name} with ID {id}: {e.Message}");
         }
     }
 
@@ -30,13 +34,16 @@ public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : clas
         {
             return await _context.Set<TEntity>().ToListAsync();
         }
+        catch (DbUpdateException e)
+        {
+            throw new Exception($"Database error while retrieving all {typeof(TEntity).Name} entities: {e.InnerException?.Message ?? e.Message}");
+        }
         catch (Exception e)
         {
-            throw new Exception("error");
+            throw new Exception($"Failed to retrieve all {typeof(TEntity).Name} entities: {e.Message}");
         }
     }
-
-    // use it here !!
+    
     public async Task<TEntity> AddAsync(TEntity entity)
     {
         try
@@ -45,9 +52,17 @@ public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : clas
             await _context.SaveChangesAsync();
             return entity;
         }
+        catch (DbUpdateException e)
+        {
+            throw new Exception($"Database error while adding new {typeof(TEntity).Name}: {e.InnerException?.Message ?? e.Message}");
+        }
+        catch (ValidationException e)
+        {
+            throw new Exception($"Validation failed while adding {typeof(TEntity).Name}: {e.Message}");
+        }
         catch (Exception e)
         {
-            throw new Exception("error");
+            throw new Exception($"Failed to add new {typeof(TEntity).Name}: {e.Message}");
         }
     }
 
@@ -59,9 +74,17 @@ public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : clas
             await _context.SaveChangesAsync();
             return entity;
         }
-        catch
+        catch (DbUpdateConcurrencyException e)
         {
-            throw new Exception("error");
+            throw new Exception($"Concurrency conflict while updating {typeof(TEntity).Name}: The record was modified by another user");
+        }
+        catch (DbUpdateException e)
+        {
+            throw new Exception($"Database error while updating {typeof(TEntity).Name}: {e.InnerException?.Message ?? e.Message}");
+        }
+        catch (Exception e)
+        {
+            throw new Exception($"Failed to update {typeof(TEntity).Name}: {e.Message}");
         }
     }
 
@@ -72,14 +95,18 @@ public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : clas
             var entity = await  _context.Set<TEntity>().FindAsync(id);
             if (entity == null)
             {
-                throw new Exception("Not found");
+                throw new Exception($"Entity with id {id} not found");
             }
             _context.Set<TEntity>().Remove(entity);
             await _context.SaveChangesAsync();
         }
-        catch
+        catch (DbUpdateException e)
         {
-            throw new Exception("error");
+            throw new Exception($"Database error while deleting {typeof(TEntity).Name} with ID {id}: {e.InnerException?.Message ?? e.Message}");
+        }
+        catch (Exception e)
+        {
+            throw new Exception($"Failed to delete {typeof(TEntity).Name} with ID {id}: {e.Message}");
         }
     }
 }

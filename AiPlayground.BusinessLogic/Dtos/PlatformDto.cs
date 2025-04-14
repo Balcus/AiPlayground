@@ -1,9 +1,8 @@
-namespace AiPlayground.DataAccess.Entities;
+namespace AiPlayground.BusinessLogic.Dtos;
 
-public class Platform
+public class PlatformDto
 {
     public int Id { get; set; }
     public string Name { get; set; } = string.Empty;
     public string ImageUrl { get; set; } = string.Empty;
-    public ICollection<Model> Models { get; set; } = new HashSet<Model>();
 }

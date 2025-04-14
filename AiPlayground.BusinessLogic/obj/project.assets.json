@@ -2902,11 +2902,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/balcus/RiderProjects/WebApplication1/AiPlayground.BusinessLogic/AiPlayground.BusinessLogic.csproj",
+      "projectUniqueName": "/home/balcus/RiderProjects/AiPlayground/AiPlayground.BusinessLogic/AiPlayground.BusinessLogic.csproj",
       "projectName": "AiPlayground.BusinessLogic",
-      "projectPath": "/home/balcus/RiderProjects/WebApplication1/AiPlayground.BusinessLogic/AiPlayground.BusinessLogic.csproj",
+      "projectPath": "/home/balcus/RiderProjects/AiPlayground/AiPlayground.BusinessLogic/AiPlayground.BusinessLogic.csproj",
       "packagesPath": "/home/balcus/.nuget/packages/",
-      "outputPath": "/home/balcus/RiderProjects/WebApplication1/AiPlayground.BusinessLogic/obj/",
+      "outputPath": "/home/balcus/RiderProjects/AiPlayground/AiPlayground.BusinessLogic/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/balcus/.nuget/NuGet/NuGet.Config"
@@ -2921,8 +2921,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "/home/balcus/RiderProjects/WebApplication1/AiPlayground.DataAccess/AiPlayground.DataAccess.csproj": {
-              "projectPath": "/home/balcus/RiderProjects/WebApplication1/AiPlayground.DataAccess/AiPlayground.DataAccess.csproj"
+            "/home/balcus/RiderProjects/AiPlayground/AiPlayground.DataAccess/AiPlayground.DataAccess.csproj": {
+              "projectPath": "/home/balcus/RiderProjects/AiPlayground/AiPlayground.DataAccess/AiPlayground.DataAccess.csproj"
             }
           }
         }
