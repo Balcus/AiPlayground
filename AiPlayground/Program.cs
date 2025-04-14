@@ -11,6 +11,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IRepository<Scope>, BaseRepository<Scope>>();
 builder.Services.AddScoped<IScopeService, ScopeService>();
+builder.Services.AddScoped<IRepository<Platform>, BaseRepository<Platform>>();
+builder.Services.AddScoped<IPlatformService, PlatformService>();
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 

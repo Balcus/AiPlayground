@@ -18,16 +18,27 @@ public class ScopeService : IScopeService
     {
         var scopes = await _scopeRepository.GetAllAsync();
 
-        return scopes.Select(scope => new ScopeDto()
+        return scopes.Select(scope => new ScopeDto
         {
             Id = scope.Id,
             Name = scope.Name,
         });
     }
 
-    public Task<ScopeDto> GetScopeByIsAsync()
+    public async Task<ScopeDto?> GetScopeByIdAsync(int id)
     {
-        throw new NotImplementedException();
+        var scope = await _scopeRepository.GetByIdAsync(id);
+
+        if (scope == null)
+        {
+            return null;
+        }
+        
+        return new ScopeDto
+        {
+            Id = scope.Id,
+            Name = scope.Name,
+        };
     }
 
     public async Task<ScopeDto> CreateScopeAsync(ScopeCreateDto scopeDto)
@@ -46,13 +57,26 @@ public class ScopeService : IScopeService
         };
     }
 
-    public Task<ScopeDto> UpdateScopeAsync(ScopeDto scopeDto)
+    public async Task<ScopeDto> UpdateScopeAsync(int id, ScopeCreateDto scopeDto)
     {
-        throw new NotImplementedException();
+        var scope = new Scope
+        {
+            Id = id,
+            Name = scopeDto.Name,
+        };
+        
+        var updatedScope = await _scopeRepository.UpdateAsync(scope);
+
+        return new ScopeDto
+        {
+            Id = updatedScope.Id,
+            Name = updatedScope.Name,
+        };
+
     }
 
-    public Task DeleteScopeAsync(int id)
+    public async Task DeleteScopeAsync(int id)
     {
-        throw new NotImplementedException();
+        await _scopeRepository.DeleteAsync(id);
     }
 }

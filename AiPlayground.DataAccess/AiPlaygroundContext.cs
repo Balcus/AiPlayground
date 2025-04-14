@@ -31,8 +31,7 @@ public class AiPlaygroundContext : DbContext
         new ScopeConfiguration().Configure(modelBuilder.Entity<Scope>());
         new PromptConfiguration().Configure(modelBuilder.Entity<Prompt>());
     }
-
-
+    
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         optionsBuilder.UseSqlServer("Server=localhost,1433;Database=AiPlayground;User Id=sa;Password=0.-Remy-.0;Encrypt=True;TrustServerCertificate=True;");

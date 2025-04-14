@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "1X7Nqp83y3g=",
+  "dgSpecHash": "MexZSqjiIRY=",
   "success": true,
-  "projectFilePath": "/home/balcus/RiderProjects/WebApplication1/AiPlayground.BusinessLogic/AiPlayground.BusinessLogic.csproj",
+  "projectFilePath": "/home/balcus/RiderProjects/AiPlayground/AiPlayground.BusinessLogic/AiPlayground.BusinessLogic.csproj",
   "expectedPackageFiles": [
     "/home/balcus/.nuget/packages/azure.core/1.38.0/azure.core.1.38.0.nupkg.sha512",
     "/home/balcus/.nuget/packages/azure.identity/1.11.4/azure.identity.1.11.4.nupkg.sha512",

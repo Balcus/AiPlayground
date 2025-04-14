@@ -4810,11 +4810,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/balcus/RiderProjects/WebApplication1/AiPlayground.DataAccess/AiPlayground.DataAccess.csproj",
+      "projectUniqueName": "/home/balcus/RiderProjects/AiPlayground/AiPlayground.DataAccess/AiPlayground.DataAccess.csproj",
       "projectName": "AiPlayground.DataAccess",
-      "projectPath": "/home/balcus/RiderProjects/WebApplication1/AiPlayground.DataAccess/AiPlayground.DataAccess.csproj",
+      "projectPath": "/home/balcus/RiderProjects/AiPlayground/AiPlayground.DataAccess/AiPlayground.DataAccess.csproj",
       "packagesPath": "/home/balcus/.nuget/packages/",
-      "outputPath": "/home/balcus/RiderProjects/WebApplication1/AiPlayground.DataAccess/obj/",
+      "outputPath": "/home/balcus/RiderProjects/AiPlayground/AiPlayground.DataAccess/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/balcus/.nuget/NuGet/NuGet.Config"

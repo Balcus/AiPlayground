@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "C7mlSw7QhU4=",
+  "dgSpecHash": "a1NSSG874gE=",
   "success": true,
-  "projectFilePath": "/home/balcus/RiderProjects/WebApplication1/AiPlayground.DataAccess/AiPlayground.DataAccess.csproj",
+  "projectFilePath": "/home/balcus/RiderProjects/AiPlayground/AiPlayground.DataAccess/AiPlayground.DataAccess.csproj",
   "expectedPackageFiles": [
     "/home/balcus/.nuget/packages/azure.core/1.38.0/azure.core.1.38.0.nupkg.sha512",
     "/home/balcus/.nuget/packages/azure.identity/1.11.4/azure.identity.1.11.4.nupkg.sha512",
