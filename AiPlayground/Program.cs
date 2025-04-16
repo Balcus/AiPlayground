@@ -15,6 +15,8 @@ builder.Services.AddScoped<IRepository<Platform>, BaseRepository<Platform>>();
 builder.Services.AddScoped<IPlatformService, PlatformService>();
 builder.Services.AddScoped<IRepository<Model>, BaseRepository<Model>>();
 builder.Services.AddScoped<IModelService, ModelService>();
+builder.Services.AddScoped<IRepository<Prompt>, BaseRepository<Prompt>>();
+builder.Services.AddScoped<IPromptService, PromptService>();
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
