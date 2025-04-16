@@ -13,6 +13,8 @@ builder.Services.AddScoped<IRepository<Scope>, BaseRepository<Scope>>();
 builder.Services.AddScoped<IScopeService, ScopeService>();
 builder.Services.AddScoped<IRepository<Platform>, BaseRepository<Platform>>();
 builder.Services.AddScoped<IPlatformService, PlatformService>();
+builder.Services.AddScoped<IRepository<Model>, BaseRepository<Model>>();
+builder.Services.AddScoped<IModelService, ModelService>();
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 

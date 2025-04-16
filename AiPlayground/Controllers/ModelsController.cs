@@ -8,29 +8,29 @@ namespace NetRomApp.Controllers;
 [ApiController]
 public class ModelsController : Controller
 {
-    private readonly IPlatformService _platformService;
+    private readonly IModelService _modelService;
 
-    public ModelsController (IPlatformService platformService)
+    public ModelsController(IModelService modelService)
     {
-        _platformService = platformService;
+        _modelService = modelService;
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetAllPlatformsAsync()
+    public async Task<IActionResult> GetModels()
     {
-        var platforms = await _platformService.GetAllPlatformsAsync();
+        var platforms = await _modelService.GetAllModelsAsync();
         return Ok(platforms);
-        
     }
 
     [HttpGet("{id}")]
-    public async Task<IActionResult> GetPlatformByIdAsync(int id)
+    public async Task<IActionResult> GetModelByIdAsync(int id)
     {
-        var platform = await _platformService.GetPlatformByIdAsync(id);
+        var platform = await _modelService.GetModelByIdAsync(id);
         if (platform == null)
         {
             return NotFound();
         }
+        
         return Ok(platform);
     }
 }

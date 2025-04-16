@@ -26,9 +26,20 @@ public class PlatformService : IPlatformService
         });
     }
 
-    public Task<PlatformDto> GetPlatformByIdAsync(int id)
+    public async Task<PlatformDto?> GetPlatformByIdAsync(int id)
     {
-        throw new NotImplementedException();
+        var platform = await _platformRepository.GetByIdAsync(id);
+        if (platform == null)
+        {
+            return null;
+        }
+
+        return new PlatformDto
+        {
+            Id = platform.Id,
+            Name = platform.Name,
+            ImageUrl = platform.ImageUrl,
+        };
     }
 
     public Task<PlatformDto> CreatePlatformAsync(PlatformCreateDto platformCreateDto)

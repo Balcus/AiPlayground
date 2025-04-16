@@ -6,7 +6,7 @@ public interface IScopeService
 {
     Task<IEnumerable<ScopeDto>> GetAllScopesAsync();
     Task<ScopeDto?> GetScopeByIdAsync(int id);
-    Task<ScopeDto> CreateScopeAsync(ScopeCreateDto scopeDto);
-    Task<ScopeDto> UpdateScopeAsync(int id, ScopeCreateDto scopeDto);
+    Task<ScopeDto> CreateScopeAsync(ScopeCreateDto scopeCreateDto);
+    Task<ScopeDto> UpdateScopeAsync(int id, ScopeCreateDto scopeCreateDto);
     Task DeleteScopeAsync(int id);
 }

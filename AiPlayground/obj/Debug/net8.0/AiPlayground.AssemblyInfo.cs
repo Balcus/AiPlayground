@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AiPlayground")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3af4ca1f8dfd023aee2fcd372c4a61f51d9049be")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+67c82abfd8349a15c940a66b8e5b99dc6acadbc8")]
 [assembly: System.Reflection.AssemblyProductAttribute("AiPlayground")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AiPlayground")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
