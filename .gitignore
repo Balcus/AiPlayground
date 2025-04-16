@@ -125,5 +125,6 @@ appsettings.Local.json
 **/Properties/PublishProfiles/*.pubxml
 **/Properties/PublishProfiles/*.pubxml.user
 
+*.DotSettings.user
 # Test Results
 TestResults/
