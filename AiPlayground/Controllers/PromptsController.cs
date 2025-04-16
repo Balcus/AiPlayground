@@ -1,12 +1,17 @@
+using AiPlayground.BusinessLogic.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace NetRomApp.Controllers;
 
+[Route("api")]
+[ApiController]
 public class PromptsController : Controller
 {
-    // GET
-    public IActionResult Index()
+    private readonly IPromptService _promptsService;
+
+    public PromptsController(IPromptService promptsService)
     {
-        return View();
+        _promptsService = promptsService;
     }
+
 }
