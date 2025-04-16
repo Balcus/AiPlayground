@@ -3,7 +3,7 @@
     using AiPlayground.BusinessLogic.Interfaces;
     using Microsoft.AspNetCore.Mvc;
 
-    // TODO: consider catching the errors that can arrise from each method and return a corrrect status code for each
+    // TODO: consider catching the errors that can arise from each method and return a corrrect status code for each
     namespace NetRomApp.Controllers;
 
     [Route("api/[controller]")]
@@ -11,10 +11,12 @@
     public class ScopesController : ControllerBase
     {
         private readonly IScopeService _scopeService;
+        private readonly IPromptService _promptService;
         
-        public ScopesController(IScopeService scopeService)
+        public ScopesController(IScopeService scopeService, IPromptService promptService)
         {
             _scopeService = scopeService;
+            _promptService = promptService;
         }
 
         [HttpGet]
@@ -35,14 +37,22 @@
             return Ok(scope);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Post([FromBody] ScopeCreateDto? scopeDto)
+        [HttpGet("{id}/prompts")]
+        public async Task<IActionResult> GetPromptsById(int id)
         {
-            if (scopeDto == null)
+            var scope = await _scopeService.GetScopeByIdAsync(id);
+            if (scope == null)
             {
-                return BadRequest();
+                return NotFound();
             }
+            
+            var prompts = await _promptService.GetPromptsByScopeIdAsync(id);
+            return Ok(prompts);
+        }
 
+        [HttpPost]
+        public async Task<IActionResult> Post([FromBody] ScopeCreateDto scopeDto)
+        {
             var createdScope = await _scopeService.CreateScopeAsync(scopeDto);
             return Ok(createdScope);
         }
