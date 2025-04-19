@@ -8,24 +8,24 @@ namespace NetRomApp.Controllers;
 [ApiController]
 public class PromptsController : Controller
 {
-    private readonly IPromptService _promptsService;
+    private readonly IPromptService _promptService;
 
-    public PromptsController(IPromptService promptsService)
+    public PromptsController(IPromptService promptService)
     {
-        _promptsService = promptsService;
+        _promptService = promptService;
     }
 
     [HttpGet]
     public async Task<IActionResult> Get()
     {
-        var prompts = await _promptsService.GetAllPromptsAsync();
+        var prompts = await _promptService.GetAllPromptsAsync();
         return Ok(prompts);
     }
 
     [HttpGet("{id}")]
     public async Task<IActionResult> Get(int id)
     {
-        var prompt = await _promptsService.GetPromptByIdAsync(id);
+        var prompt = await _promptService.GetPromptByIdAsync(id);
         if (prompt == null)
         {
             return NotFound();
@@ -37,14 +37,21 @@ public class PromptsController : Controller
     [HttpPost]
     public async Task<IActionResult> Post([FromBody] PromptCreateDto promptCreateDto)
     {
-        var createdPrompt = await _promptsService.CreatePromptAsync(promptCreateDto);
+        var createdPrompt = await _promptService.CreatePromptAsync(promptCreateDto);
         return Ok(createdPrompt);
     }
 
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(int id)
     {
-        await _promptsService.DeletePromptAsync(id);
-        return Ok();
+        try
+        {
+            await _promptService.DeletePromptAsync(id);
+            return NoContent();
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
     }
 }

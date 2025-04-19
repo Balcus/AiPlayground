@@ -11,12 +11,18 @@
     public class ScopesController : ControllerBase
     {
         private readonly IScopeService _scopeService;
-        private readonly IPromptService _promptService;
         
         public ScopesController(IScopeService scopeService, IPromptService promptService)
         {
             _scopeService = scopeService;
-            _promptService = promptService;
+        }
+        
+        [HttpGet("{scopeId}/prompts")]
+        public async Task<IActionResult> GetPromptsByScopeIdAsync(int scopeId)
+        {
+            var prompts = await _scopeService.GetPromptsByScopeIdAsync(scopeId);
+
+            return Ok(prompts);
         }
 
         [HttpGet]
@@ -36,20 +42,7 @@
             }
             return Ok(scope);
         }
-
-        [HttpGet("{id}/prompts")]
-        public async Task<IActionResult> GetPromptsById(int id)
-        {
-            var scope = await _scopeService.GetScopeByIdAsync(id);
-            if (scope == null)
-            {
-                return NotFound();
-            }
-            
-            var prompts = await _promptService.GetPromptsByScopeIdAsync(id);
-            return Ok(prompts);
-        }
-
+        
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] ScopeCreateDto scopeDto)
         {
@@ -64,7 +57,6 @@
             return Ok();
         }
 
-        // TODO: make sure this is ok as I changed signature from Put(ScopeDto scopeDto) -> Put(int id, ScopeCreateDto scopeDto)
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, ScopeCreateDto scopeDto)
         {

@@ -9,13 +9,26 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddScoped<IRepository<Scope>, BaseRepository<Scope>>();
-builder.Services.AddScoped<IScopeService, ScopeService>();
-builder.Services.AddScoped<IRepository<Platform>, BaseRepository<Platform>>();
-builder.Services.AddScoped<IPlatformService, PlatformService>();
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAnyOrigin",
+        b =>
+        {
+            b.AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader();
+        });
+});
+
+builder.Services.AddScoped<IRepository<Scope>, ScopeRepository>();
+builder.Services.AddScoped<IRepository<Platform>, PlatformRepository>();
 builder.Services.AddScoped<IRepository<Model>, BaseRepository<Model>>();
-builder.Services.AddScoped<IModelService, ModelService>();
 builder.Services.AddScoped<IRepository<Prompt>, BaseRepository<Prompt>>();
+
+builder.Services.AddScoped<IScopeService, ScopeService>();
+builder.Services.AddScoped<IPlatformService, PlatformService>();
+builder.Services.AddScoped<IModelService, ModelService>();
 builder.Services.AddScoped<IPromptService, PromptService>();
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
@@ -33,5 +46,6 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
+app.UseCors("AllowAnyOrigin");
 
 app.Run();
