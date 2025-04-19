@@ -41,19 +41,4 @@ public class PlatformService : IPlatformService
             ImageUrl = platform.ImageUrl,
         };
     }
-
-    public Task<PlatformDto> CreatePlatformAsync(PlatformCreateDto platformCreateDto)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<PlatformDto> UpdatePlatformAsync(int id, PlatformCreateDto platformCreateDto)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task DeletePlatformAsync(int id)
-    {
-        throw new NotImplementedException();
-    }
 }

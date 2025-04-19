@@ -34,6 +34,6 @@ public class AiPlaygroundContext : DbContext
     
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseSqlServer("Server=localhost,1433;Database=AiPlayground;User Id=sa;Password=0.-Remy-.0;Encrypt=True;TrustServerCertificate=True;");
+        optionsBuilder.UseSqlServer("Server=localhost,8003;Database=AiPlayground;User Id=sa;Password=0.-Remy-.0;Encrypt=True;TrustServerCertificate=True;");
     }
 }

@@ -5,14 +5,14 @@ namespace AiPlayground.DataAccess.Repositories;
 
 public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : class
 {
-    private readonly AiPlaygroundContext _context;
+    protected readonly AiPlaygroundContext _context;
     
     public BaseRepository(AiPlaygroundContext context)
     {
         _context = context;
     }
     
-    public async Task<TEntity?> GetByIdAsync(int id)
+    public virtual async Task<TEntity?> GetByIdAsync(int id)
     {
         try
         {
@@ -28,7 +28,7 @@ public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : clas
         }
     }
 
-    public async Task<IEnumerable<TEntity>> GetAllAsync()
+    public virtual async Task<IEnumerable<TEntity>> GetAllAsync()
     {
         try
         {
@@ -44,7 +44,7 @@ public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : clas
         }
     }
     
-    public async Task<TEntity> AddAsync(TEntity entity)
+    public virtual async Task<TEntity> AddAsync(TEntity entity)
     {
         try
         { 
@@ -66,7 +66,7 @@ public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : clas
         }
     }
 
-    public async Task<TEntity> UpdateAsync(TEntity entity)
+    public virtual async Task<TEntity> UpdateAsync(TEntity entity)
     {
         try
         {
@@ -88,7 +88,7 @@ public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : clas
         }
     }
 
-    public async Task DeleteAsync(int id)
+    public virtual async Task DeleteAsync(int id)
     {
         try
         {

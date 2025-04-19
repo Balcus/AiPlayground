@@ -1,11 +1,12 @@
 {
   "Version": 1,
-  "Hash": "EKmOtgiZpJKVp4ZdcBZciIrAVYgqJ44WVzy6PoTwZTk=",
+  "Hash": "PWqxrqCikqclUtM2DMIdy/EiYtjM/Hc41Q4g0miRnNY=",
   "Source": "AiPlayground",
   "BasePath": "_content/AiPlayground",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
   "DiscoveryPatterns": [],
-  "Assets": []
+  "Assets": [],
+  "Endpoints": []
 }

@@ -41,19 +41,4 @@ public class ModelService: IModelService
             PlatformId = model.PlatformId,
         };
     }
-
-    public Task<ModelDto> CreateModelAsync(ModelCreateDto modelDto)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<ModelDto> UpdateModelAsync(int id, ModelCreateDto modelCreateDto)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task DeleteModelAsync(int id)
-    {
-        throw new NotImplementedException();
-    }
 }

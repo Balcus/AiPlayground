@@ -79,4 +79,25 @@ public class ScopeService : IScopeService
     {
         await _scopeRepository.DeleteAsync(id);
     }
+
+    public async Task<IEnumerable<PromptDto>> GetPromptsByScopeIdAsync(int scopeId)
+    {
+        var scope = await _scopeRepository.GetByIdAsync(scopeId);
+
+        if (scope == null)
+        {
+            return new List<PromptDto>();
+        }
+
+        var promptsByScope = scope.Prompts;
+
+        return promptsByScope.Select(p => new PromptDto
+        {
+            Id = p.Id,
+            Name = p.Name,
+            SystemMsg = p.SystemMsg,
+            ExpectedResponse = p.ExpectedResponse,
+            UserMessage = p.UserMessage,
+        });
+    }
 }
