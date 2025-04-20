@@ -1,23 +1,75 @@
 using AiPlayground.BusinessLogic.Dtos;
 using AiPlayground.BusinessLogic.Interfaces;
 using AiPlayground.DataAccess.Entities;
+using AiPlayground.DataAccess.Repositories;
 
 namespace AiPlayground.BusinessLogic.Services;
 
 public class RunService : IRunService
 {
-    public Task<IEnumerable<Run>> GetRunsByPromptIdAsync(int promptId)
+    private readonly RunRepository _runRepository;
+
+    public RunService(RunRepository runRepository)
     {
-        throw new NotImplementedException();
+        _runRepository = runRepository;
+    }
+    
+    public async Task<IEnumerable<RunDto>> GetRunsByPromptIdAsync(int promptId)
+    {
+        var runs = await _runRepository.GetAll();
+        var runsForPrompt = runs.Where(r => r.PromptId == promptId);
+
+        return runsForPrompt.Select(r => new RunDto
+        {
+            Id = r.Id,
+            ActualResponse = r.ActualResponse,
+            ModelId = r.ModelId,
+            PromptId = r.PromptId,
+            Rating = r.Rating,
+            Temp = r.Temp,
+            UserRating = r.UserRating,
+        });
     }
 
-    public Task<IEnumerable<Run>> GetRunsByModelIdAsync(int modelId)
+    public async Task<IEnumerable<RunDto>> GetRunsByModelIdAsync(int modelId)
     {
-        throw new NotImplementedException();
+        var runs = await _runRepository.GetAll();
+        var runsForPrompt = runs.Where(r => r.ModelId == modelId);
+
+        return runsForPrompt.Select(r => new RunDto
+        {
+            Id = r.Id,
+            ActualResponse = r.ActualResponse,
+            ModelId = r.ModelId,
+            PromptId = r.PromptId,
+            Rating = r.Rating,
+            Temp = r.Temp,
+            UserRating = r.UserRating,
+        });
     }
 
-    public Task<RunDto> UpdateScopeAsync(int id, RunUpdateDto scopeCreateDto)
+    public async Task<RunDto?> UpdateScopeAsync(int id, RunUpdateDto runUpdateDto)
     {
-        throw new NotImplementedException();
+        var existingRun = await _runRepository.GetByIdAsync(id);
+    
+        if (existingRun == null)
+        {
+            return null;
+        }
+    
+        existingRun.UserRating = runUpdateDto.UserRating;
+    
+        await _runRepository.UpdateAsync(existingRun);
+    
+        return new RunDto
+        {
+            Id = existingRun.Id,
+            ActualResponse = existingRun.ActualResponse,
+            ModelId = existingRun.ModelId,
+            PromptId = existingRun.PromptId,
+            Rating = existingRun.Rating,
+            Temp = existingRun.Temp,
+            UserRating = existingRun.UserRating
+        };
     }
 }

@@ -1,8 +1,10 @@
+using System.Reflection;
 using AiPlayground.BusinessLogic.Interfaces;
 using AiPlayground.BusinessLogic.Services;
 using AiPlayground.DataAccess;
 using AiPlayground.DataAccess.Entities;
 using AiPlayground.DataAccess.Repositories;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +21,14 @@ builder.Services.AddCors(options =>
                 .AllowAnyMethod()
                 .AllowAnyHeader();
         });
+});
+
+builder.Services.AddSwaggerGen(c => {
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "AI Playground API", Version = "v1" });
+    
+    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+    c.IncludeXmlComments(xmlPath);
 });
 
 builder.Services.AddScoped<IRepository<Scope>, ScopeRepository>();
