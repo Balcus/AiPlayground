@@ -271,3 +271,5 @@
 /home/balcus/RiderProjects/AiPlayground/AiPlayground/obj/Debug/net8.0/AiPlayground.pdb
 /home/balcus/RiderProjects/AiPlayground/AiPlayground/obj/Debug/net8.0/AiPlayground.genruntimeconfig.cache
 /home/balcus/RiderProjects/AiPlayground/AiPlayground/obj/Debug/net8.0/ref/AiPlayground.dll
+/home/balcus/RiderProjects/AiPlayground/AiPlayground/bin/Debug/net8.0/AiPlayground.xml
+/home/balcus/RiderProjects/AiPlayground/AiPlayground/obj/Debug/net8.0/AiPlayground.xml
