@@ -1,4 +1,4 @@
-using AiPlayground.DataAccess.Configurations;
+using AiPlayground.DataAccess.Configuration;
 using AiPlayground.DataAccess.Entities;
 using Microsoft.EntityFrameworkCore;
 

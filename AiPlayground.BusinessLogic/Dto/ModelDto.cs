@@ -1,8 +1,8 @@
-namespace AiPlayground.BusinessLogic.Dtos;
+namespace AiPlayground.BusinessLogic.Dto;
 
 public class ModelDto
 {
     public int Id { get; set; }
     public string Name { get; set; } = string.Empty;
-    public int PlatformId { get; set; }
+    public double AverageRating { get; set; }
 }

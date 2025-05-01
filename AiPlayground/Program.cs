@@ -35,11 +35,13 @@ builder.Services.AddScoped<IRepository<Scope>, ScopeRepository>();
 builder.Services.AddScoped<IRepository<Platform>, PlatformRepository>();
 builder.Services.AddScoped<IRepository<Model>, BaseRepository<Model>>();
 builder.Services.AddScoped<IRepository<Prompt>, BaseRepository<Prompt>>();
+builder.Services.AddScoped<IRepository<Run>, BaseRepository<Run>>();
 
 builder.Services.AddScoped<IScopeService, ScopeService>();
 builder.Services.AddScoped<IPlatformService, PlatformService>();
 builder.Services.AddScoped<IModelService, ModelService>();
 builder.Services.AddScoped<IPromptService, PromptService>();
+builder.Services.AddScoped<IRunService, RunService>();
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 

@@ -1,4 +1,4 @@
-using AiPlayground.BusinessLogic.Dtos;
+using AiPlayground.BusinessLogic.Dto;
 using AiPlayground.BusinessLogic.Interfaces;
 using AiPlayground.DataAccess.Entities;
 using AiPlayground.DataAccess.Repositories;
@@ -22,7 +22,12 @@ public class PlatformService : IPlatformService
         {
             Id = p.Id,
             Name = p.Name,
-            ImageUrl = p.ImageUrl,
+            Models = p.Models.Select(m => new ModelDto
+            {
+                Id = m.Id,
+                Name = m.Name,
+                AverageRating = 0,
+            }).ToList(),
         });
     }
 
@@ -38,7 +43,12 @@ public class PlatformService : IPlatformService
         {
             Id = platform.Id,
             Name = platform.Name,
-            ImageUrl = platform.ImageUrl,
+            Models = platform.Models.Select(m => new ModelDto
+            {
+                Id = m.Id,
+                Name = m.Name,
+                AverageRating = 0,
+            }).ToList(),
         };
     }
 }

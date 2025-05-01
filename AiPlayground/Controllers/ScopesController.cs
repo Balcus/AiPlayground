@@ -1,5 +1,5 @@
 
-    using AiPlayground.BusinessLogic.Dtos;
+    using AiPlayground.BusinessLogic.Dto;
     using AiPlayground.BusinessLogic.Interfaces;
     using Microsoft.AspNetCore.Mvc;
 
@@ -17,14 +17,19 @@
             _scopeService = scopeService;
         }
         
+        /// <summary>
+        /// Fetches all prompts for a scope id
+        /// </summary>
         [HttpGet("{scopeId}/prompts")]
         public async Task<IActionResult> GetPromptsByScopeIdAsync(int scopeId)
         {
             var prompts = await _scopeService.GetPromptsByScopeIdAsync(scopeId);
-
             return Ok(prompts);
         }
 
+        /// <summary>
+        /// Get all scopes
+        /// </summary>
         [HttpGet]
         public async Task<IActionResult> Get()
         {
@@ -32,6 +37,9 @@
             return Ok(scopes);
         }
 
+        /// <summary>
+        /// Gets the scope with the given id
+        /// </summary>
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
@@ -43,6 +51,9 @@
             return Ok(scope);
         }
         
+        /// <summary>
+        /// Creates a new scope
+        /// </summary>
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] ScopeCreateDto scopeDto)
         {
@@ -50,6 +61,9 @@
             return Ok(createdScope);
         }
 
+        /// <summary>
+        /// Deletes a scope by id
+        /// </summary>
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
@@ -57,6 +71,9 @@
             return Ok();
         }
 
+        /// <summary>
+        /// Updates a scope by id
+        /// </summary>
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, ScopeCreateDto scopeDto)
         {

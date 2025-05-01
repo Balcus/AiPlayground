@@ -273,3 +273,5 @@
 /home/balcus/RiderProjects/AiPlayground/AiPlayground/obj/Debug/net8.0/ref/AiPlayground.dll
 /home/balcus/RiderProjects/AiPlayground/AiPlayground/bin/Debug/net8.0/AiPlayground.xml
 /home/balcus/RiderProjects/AiPlayground/AiPlayground/obj/Debug/net8.0/AiPlayground.xml
+/home/balcus/RiderProjects/AiPlayground/AiPlayground/bin/Debug/net8.0/Azure.AI.OpenAI.dll
+/home/balcus/RiderProjects/AiPlayground/AiPlayground/bin/Debug/net8.0/OpenAI.dll

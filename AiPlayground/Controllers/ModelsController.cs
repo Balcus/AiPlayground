@@ -1,4 +1,4 @@
-using AiPlayground.BusinessLogic.Dtos;
+using AiPlayground.BusinessLogic.Dto;
 using AiPlayground.BusinessLogic.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,22 +15,28 @@ public class ModelsController : Controller
         _modelService = modelService;
     }
 
+    /// <summary>
+    /// Fetches all models
+    /// </summary>
     [HttpGet]
-    public async Task<IActionResult> GetModels()
+    public async Task<IActionResult> GetModelsAsync()
     {
         var platforms = await _modelService.GetAllModelsAsync();
         return Ok(platforms);
     }
 
+    /// <summary>
+    /// Fetches a model by id
+    /// </summary>
     [HttpGet("{id}")]
     public async Task<IActionResult> GetModelByIdAsync(int id)
     {
-        var platform = await _modelService.GetModelByIdAsync(id);
-        if (platform == null)
+        var model = await _modelService.GetModelByIdAsync(id);
+        if (model == null)
         {
             return NotFound();
         }
         
-        return Ok(platform);
+        return Ok(model);
     }
 }

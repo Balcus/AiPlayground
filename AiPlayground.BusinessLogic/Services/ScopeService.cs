@@ -1,4 +1,4 @@
-using AiPlayground.BusinessLogic.Dtos;
+using AiPlayground.BusinessLogic.Dto;
 using AiPlayground.BusinessLogic.Interfaces;
 using AiPlayground.DataAccess.Entities;
 using AiPlayground.DataAccess.Repositories;
@@ -57,14 +57,15 @@ public class ScopeService : IScopeService
         };
     }
 
-    public async Task<ScopeDto> UpdateScopeAsync(int id, ScopeCreateDto scopeDto)
+    public async Task<ScopeDto?> UpdateScopeAsync(int id, ScopeCreateDto scopeCreateDto)
     {
-        var scope = new Scope
+        var scope = await _scopeRepository.GetByIdAsync(id);
+        if (scope == null)
         {
-            Id = id,
-            Name = scopeDto.Name,
-        };
+            throw new Exception("Scope not found");
+        }
         
+        scope.Name = scopeCreateDto.Name;
         var updatedScope = await _scopeRepository.UpdateAsync(scope);
 
         return new ScopeDto
@@ -72,11 +73,15 @@ public class ScopeService : IScopeService
             Id = updatedScope.Id,
             Name = updatedScope.Name,
         };
-
     }
 
     public async Task DeleteScopeAsync(int id)
     {
+        var scope = await _scopeRepository.GetByIdAsync(id);
+        if (scope == null)
+        {
+            throw new Exception("Scope not found");
+        }
         await _scopeRepository.DeleteAsync(id);
     }
 
