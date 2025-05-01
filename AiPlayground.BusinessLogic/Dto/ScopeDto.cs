@@ -1,4 +1,4 @@
-namespace AiPlayground.BusinessLogic.Dtos;
+namespace AiPlayground.BusinessLogic.Dto;
 
 public class ScopeDto
 {

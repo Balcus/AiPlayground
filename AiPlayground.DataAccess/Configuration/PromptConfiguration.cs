@@ -2,7 +2,7 @@ using AiPlayground.DataAccess.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace AiPlayground.DataAccess.Configurations;
+namespace AiPlayground.DataAccess.Configuration;
 
 public class PromptConfiguration : IEntityTypeConfiguration<Prompt>
 {

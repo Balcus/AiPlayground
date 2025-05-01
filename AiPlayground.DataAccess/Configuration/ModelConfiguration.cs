@@ -2,7 +2,7 @@ using AiPlayground.DataAccess.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace AiPlayground.DataAccess.Configurations;
+namespace AiPlayground.DataAccess.Configuration;
 
 public class ModelConfiguration : IEntityTypeConfiguration<Model>
 {
@@ -25,13 +25,13 @@ public class ModelConfiguration : IEntityTypeConfiguration<Model>
             new Model
             {
                 Id = 1,
-                Name = "GPT-3.5",
+                Name = "gpt-4o",
                 PlatformId = 1,
             },
             new Model
             {
                 Id = 2,
-                Name = "GPT-4",
+                Name = "gpt-4o-mini",
                 PlatformId = 1,
             },
             new Model

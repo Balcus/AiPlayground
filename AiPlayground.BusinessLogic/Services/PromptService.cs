@@ -1,4 +1,4 @@
-using AiPlayground.BusinessLogic.Dtos;
+using AiPlayground.BusinessLogic.Dto;
 using AiPlayground.BusinessLogic.Interfaces;
 using AiPlayground.DataAccess.Entities;
 using AiPlayground.DataAccess.Repositories;
@@ -21,23 +21,6 @@ public class PromptService : IPromptService
             Id = p.Id,
             Name = p.Name,
             UserMessage = p.UserMessage,
-            ScopeId = p.ScopeId,
-            ExpectedResponse = p.ExpectedResponse,
-            SystemMsg = p.SystemMsg,
-        });
-    }
-    
-    public async Task<IEnumerable<PromptDto>> GetPromptsByScopeIdAsync(int scopeId)
-    {
-        var prompts = await _promptRepository.GetAllAsync();
-        var promptsForScope = prompts.Where(p => p.ScopeId == scopeId);
-    
-        return promptsForScope.Select(p => new PromptDto
-        {
-            Id = p.Id,
-            Name = p.Name,
-            UserMessage = p.UserMessage,
-            ScopeId = p.ScopeId,
             ExpectedResponse = p.ExpectedResponse,
             SystemMsg = p.SystemMsg,
         });
@@ -57,7 +40,6 @@ public class PromptService : IPromptService
             Id = prompt.Id,
             Name = prompt.Name,
             UserMessage = prompt.UserMessage,
-            ScopeId = prompt.ScopeId,
             ExpectedResponse = prompt.ExpectedResponse,
             SystemMsg = prompt.SystemMsg,
         };
@@ -80,19 +62,18 @@ public class PromptService : IPromptService
             Id = createdPrompt.Id,
             Name = prompt.Name,
             UserMessage = prompt.UserMessage,
-            ScopeId = prompt.ScopeId,
             ExpectedResponse = prompt.ExpectedResponse,
             SystemMsg = prompt.SystemMsg,
         };
     }
 
-    public Task<PromptDto> UpdatePromptAsync(int id, PromptCreateDto promptCreateDto)
-    {
-        throw new NotImplementedException();
-    }
-
     public async Task DeletePromptAsync(int id)
     {
+        var prompt = await _promptRepository.GetByIdAsync(id);
+        if (prompt == null)
+        {
+            throw new Exception("Prompt not found");
+        }
         await _promptRepository.DeleteAsync(id);
     }
 }

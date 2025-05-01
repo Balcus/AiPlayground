@@ -1,4 +1,4 @@
-using AiPlayground.BusinessLogic.Dtos;
+using AiPlayground.BusinessLogic.Dto;
 using AiPlayground.BusinessLogic.Interfaces;
 using AiPlayground.DataAccess.Entities;
 using AiPlayground.DataAccess.Repositories;
@@ -21,7 +21,6 @@ public class ModelService: IModelService
         {
             Id = m.Id,
             Name = m.Name,
-            PlatformId = m.PlatformId,
         });
     }
 
@@ -38,7 +37,6 @@ public class ModelService: IModelService
         {
             Id = model.Id,
             Name = model.Name,
-            PlatformId = model.PlatformId,
         };
     }
 }

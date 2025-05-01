@@ -1,8 +1,7 @@
-namespace AiPlayground.BusinessLogic.Dtos;
+namespace AiPlayground.BusinessLogic.Dto;
 
-public class PromptDto
+public class PromptCreateDto
 {
-    public int Id { get; set; }
     public string UserMessage { get; set; } = string.Empty;
     public string Name { get; set; } = string.Empty;
     public string SystemMsg { get; set; } = string.Empty;

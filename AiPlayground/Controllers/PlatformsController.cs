@@ -8,12 +8,14 @@ namespace NetRomApp.Controllers;
 public class PlatformsController : Controller
 {
     private readonly IPlatformService _platformService;
-
     public PlatformsController (IPlatformService platformService)
     {
         _platformService = platformService;
     }
 
+    /// <summary>
+    /// Fetches all platforms
+    /// </summary>
     [HttpGet]
     public async Task<IActionResult> GetAllPlatformsAsync()
     {
@@ -22,6 +24,9 @@ public class PlatformsController : Controller
         
     }
 
+    /// <summary>
+    /// Fetches a platform by id
+    /// </summary>
     [HttpGet("{id}")]
     public async Task<IActionResult> GetPlatformByIdAsync(int id)
     {

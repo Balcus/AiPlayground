@@ -1,4 +1,4 @@
-using AiPlayground.BusinessLogic.Dtos;
+using AiPlayground.BusinessLogic.Dto;
 using AiPlayground.BusinessLogic.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,6 +15,9 @@ public class PromptsController : Controller
         _promptService = promptService;
     }
 
+    /// <summary>
+    /// Fetch all prompts
+    /// </summary>
     [HttpGet]
     public async Task<IActionResult> Get()
     {
@@ -22,6 +25,9 @@ public class PromptsController : Controller
         return Ok(prompts);
     }
 
+    /// <summary>
+    /// Fetch prompt by id
+    /// </summary>
     [HttpGet("{id}")]
     public async Task<IActionResult> Get(int id)
     {
@@ -34,6 +40,9 @@ public class PromptsController : Controller
         return Ok(prompt);
     }
 
+    /// <summary>
+    /// Create a new prompt
+    /// </summary>
     [HttpPost]
     public async Task<IActionResult> Post([FromBody] PromptCreateDto promptCreateDto)
     {
@@ -41,6 +50,9 @@ public class PromptsController : Controller
         return Ok(createdPrompt);
     }
 
+    /// <summary>
+    /// Delete a prompt by scope id
+    /// </summary>
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(int id)
     {

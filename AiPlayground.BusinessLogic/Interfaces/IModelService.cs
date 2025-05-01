@@ -1,4 +1,4 @@
-using AiPlayground.BusinessLogic.Dtos;
+using AiPlayground.BusinessLogic.Dto;
 
 namespace AiPlayground.BusinessLogic.Interfaces;
 
