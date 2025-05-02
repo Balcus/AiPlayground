@@ -6,6 +6,7 @@
 *.userosscache
 *.sln.docstates
 *.userprefs
+.gitignore
 
 # Build results
 [Dd]ebug/

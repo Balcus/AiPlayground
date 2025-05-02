@@ -1,3 +1,4 @@
+using AiPlayground.BusinessLogic.AiClient;
 using AiPlayground.BusinessLogic.Dto;
 using AiPlayground.BusinessLogic.Enums;
 using AiPlayground.BusinessLogic.Interfaces;
@@ -40,7 +41,7 @@ public class RunService : IRunService
             }
             
             var platformType = (PlatformType)model.PlatformId;
-            if (platformType == PlatformType.OpenAI)
+            if (platformType == PlatformType.OpenAi)
             {
                 var run = await CreateRunAsync(model, prompt, modelToRun, modelToRun.Temperature);
                 runs.Add(run);
@@ -49,27 +50,13 @@ public class RunService : IRunService
         return runs;
     }
 
-    private async Task<RunDto> CreateRunAsync(Model model, Prompt prompt, ModelRunDto modelToRun, object temperature)
+    private async Task<RunDto> CreateRunAsync(Model model, Prompt prompt, ModelRunDto modelToRun, double temperature)
     {
-        ChatClient chatClient = new(model: model.Name, apiKey: Environment.GetEnvironmentVariable("OPENAI_API_KEY"));
-
-        var sysMsg = new SystemChatMessage(prompt.SystemMsg);
-        var usrMsg = new UserChatMessage(prompt.UserMessage);
-
-        var message = new List<ChatMessage>
-        {
-            sysMsg,
-            usrMsg
-        };
-
-        var options = new ChatCompletionOptions
-        {
-            Temperature = (float)temperature,
-        };
+        AiClientFactory factory = new AiClientFactory();
+        OpenAiClient client = (OpenAiClient)factory.GenerateClient(model);
+        string response = await client.GenerateResponseAsync(prompt.SystemMsg, prompt.UserMessage, temperature);
         
-        ChatCompletion reChatCompletion = await chatClient.CompleteChatAsync(message, options);
-        var actualResponse = reChatCompletion.Content.First().Text;
-        var run = await CreateRun(model.Id, prompt.Id, modelToRun, actualResponse, (double)temperature, 0);
+        var run = await CreateRun(model.Id, prompt.Id, modelToRun, response, (double)temperature, 0);
 
         return new RunDto
         {
@@ -80,7 +67,6 @@ public class RunService : IRunService
             Temp = run.Temp,
             Rating = run.Rating,
             UserRating = run.UserRating,
-            
         };
     }
 
