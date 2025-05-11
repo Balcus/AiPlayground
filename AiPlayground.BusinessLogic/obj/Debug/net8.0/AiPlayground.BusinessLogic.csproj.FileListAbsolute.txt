@@ -24,7 +24,6 @@
 /home/balcus/RiderProjects/AiPlayground/AiPlayground.BusinessLogic/obj/Debug/net8.0/AiPlayground.BusinessLogic.AssemblyInfoInputs.cache
 /home/balcus/RiderProjects/AiPlayground/AiPlayground.BusinessLogic/obj/Debug/net8.0/AiPlayground.BusinessLogic.AssemblyInfo.cs
 /home/balcus/RiderProjects/AiPlayground/AiPlayground.BusinessLogic/obj/Debug/net8.0/AiPlayground.BusinessLogic.csproj.CoreCompileInputs.cache
-/home/balcus/RiderProjects/AiPlayground/AiPlayground.BusinessLogic/obj/Debug/net8.0/AiPlayground.BusinessLogic.sourcelink.json
 /home/balcus/RiderProjects/AiPlayground/AiPlayground.BusinessLogic/obj/Debug/net8.0/AiPlaygr.451E241F.Up2Date
 /home/balcus/RiderProjects/AiPlayground/AiPlayground.BusinessLogic/obj/Debug/net8.0/AiPlayground.BusinessLogic.dll
 /home/balcus/RiderProjects/AiPlayground/AiPlayground.BusinessLogic/obj/Debug/net8.0/refint/AiPlayground.BusinessLogic.dll

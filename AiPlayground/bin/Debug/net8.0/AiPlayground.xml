@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AiPlayground</name>
+    </assembly>
+    <members>
+        <member name="M:NetRomApp.Controllers.ModelsController.GetModelsAsync">
+            <summary>
+            Fetches all models
+            </summary>
+        </member>
+        <member name="M:NetRomApp.Controllers.ModelsController.GetModelByIdAsync(System.Int32)">
+            <summary>
+            Fetches a model by id
+            </summary>
+        </member>
+        <member name="M:NetRomApp.Controllers.PlatformsController.GetAllPlatformsAsync">
+            <summary>
+            Fetches all platforms
+            </summary>
+        </member>
+        <member name="M:NetRomApp.Controllers.PlatformsController.GetPlatformByIdAsync(System.Int32)">
+            <summary>
+            Fetches a platform by id
+            </summary>
+        </member>
+        <member name="M:NetRomApp.Controllers.PromptsController.Get">
+            <summary>
+            Fetch all prompts
+            </summary>
+        </member>
+        <member name="M:NetRomApp.Controllers.PromptsController.Get(System.Int32)">
+            <summary>
+            Fetch prompt by id
+            </summary>
+        </member>
+        <member name="M:NetRomApp.Controllers.PromptsController.Post(AiPlayground.BusinessLogic.Dto.PromptCreateDto)">
+            <summary>
+            Create a new prompt
+            </summary>
+        </member>
+        <member name="M:NetRomApp.Controllers.PromptsController.Delete(System.Int32)">
+            <summary>
+            Delete a prompt by scope id
+            </summary>
+        </member>
+        <member name="M:NetRomApp.Controllers.ScopesController.GetPromptsByScopeIdAsync(System.Int32)">
+            <summary>
+            Fetches all prompts for a scope id
+            </summary>
+        </member>
+        <member name="M:NetRomApp.Controllers.ScopesController.Get">
+            <summary>
+            Get all scopes
+            </summary>
+        </member>
+        <member name="M:NetRomApp.Controllers.ScopesController.Get(System.Int32)">
+            <summary>
+            Gets the scope with the given id
+            </summary>
+        </member>
+        <member name="M:NetRomApp.Controllers.ScopesController.Post(AiPlayground.BusinessLogic.Dto.ScopeCreateDto)">
+            <summary>
+            Creates a new scope
+            </summary>
+        </member>
+        <member name="M:NetRomApp.Controllers.ScopesController.Delete(System.Int32)">
+            <summary>
+            Deletes a scope by id
+            </summary>
+        </member>
+        <member name="M:NetRomApp.Controllers.ScopesController.Put(System.Int32,AiPlayground.BusinessLogic.Dto.ScopeCreateDto)">
+            <summary>
+            Updates a scope by id
+            </summary>
+        </member>
+    </members>
+</doc>

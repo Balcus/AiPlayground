@@ -22,7 +22,6 @@
 /home/balcus/RiderProjects/AiPlayground/AiPlayground.DataAccess/obj/Debug/net8.0/AiPlayground.DataAccess.AssemblyInfoInputs.cache
 /home/balcus/RiderProjects/AiPlayground/AiPlayground.DataAccess/obj/Debug/net8.0/AiPlayground.DataAccess.AssemblyInfo.cs
 /home/balcus/RiderProjects/AiPlayground/AiPlayground.DataAccess/obj/Debug/net8.0/AiPlayground.DataAccess.csproj.CoreCompileInputs.cache
-/home/balcus/RiderProjects/AiPlayground/AiPlayground.DataAccess/obj/Debug/net8.0/AiPlayground.DataAccess.sourcelink.json
 /home/balcus/RiderProjects/AiPlayground/AiPlayground.DataAccess/obj/Debug/net8.0/AiPlayground.DataAccess.dll
 /home/balcus/RiderProjects/AiPlayground/AiPlayground.DataAccess/obj/Debug/net8.0/refint/AiPlayground.DataAccess.dll
 /home/balcus/RiderProjects/AiPlayground/AiPlayground.DataAccess/obj/Debug/net8.0/AiPlayground.DataAccess.pdb

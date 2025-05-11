@@ -92,8 +92,6 @@
 /home/balcus/RiderProjects/WebApplication1/AiPlayground/obj/Debug/net8.0/AiPlayground.sourcelink.json
 /home/balcus/RiderProjects/WebApplication1/AiPlayground/bin/Debug/net8.0/AiPlayground.BusinessLogic.dll
 /home/balcus/RiderProjects/WebApplication1/AiPlayground/bin/Debug/net8.0/AiPlayground.BusinessLogic.pdb
-/home/balcus/RiderProjects/AiPlayground/AiPlayground/bin/Debug/net8.0/appsettings.Development.json
-/home/balcus/RiderProjects/AiPlayground/AiPlayground/bin/Debug/net8.0/appsettings.json
 /home/balcus/RiderProjects/AiPlayground/AiPlayground/bin/Debug/net8.0/AiPlayground.staticwebassets.endpoints.json
 /home/balcus/RiderProjects/AiPlayground/AiPlayground/bin/Debug/net8.0/AiPlayground
 /home/balcus/RiderProjects/AiPlayground/AiPlayground/bin/Debug/net8.0/AiPlayground.deps.json
@@ -254,7 +252,6 @@
 /home/balcus/RiderProjects/AiPlayground/AiPlayground/obj/Debug/net8.0/AiPlayground.csproj.CoreCompileInputs.cache
 /home/balcus/RiderProjects/AiPlayground/AiPlayground/obj/Debug/net8.0/AiPlayground.MvcApplicationPartsAssemblyInfo.cs
 /home/balcus/RiderProjects/AiPlayground/AiPlayground/obj/Debug/net8.0/AiPlayground.MvcApplicationPartsAssemblyInfo.cache
-/home/balcus/RiderProjects/AiPlayground/AiPlayground/obj/Debug/net8.0/AiPlayground.sourcelink.json
 /home/balcus/RiderProjects/AiPlayground/AiPlayground/obj/Debug/net8.0/scopedcss/bundle/AiPlayground.styles.css
 /home/balcus/RiderProjects/AiPlayground/AiPlayground/obj/Debug/net8.0/staticwebassets.build.json
 /home/balcus/RiderProjects/AiPlayground/AiPlayground/obj/Debug/net8.0/staticwebassets.development.json
@@ -275,3 +272,5 @@
 /home/balcus/RiderProjects/AiPlayground/AiPlayground/obj/Debug/net8.0/AiPlayground.xml
 /home/balcus/RiderProjects/AiPlayground/AiPlayground/bin/Debug/net8.0/Azure.AI.OpenAI.dll
 /home/balcus/RiderProjects/AiPlayground/AiPlayground/bin/Debug/net8.0/OpenAI.dll
+/home/balcus/RiderProjects/AiPlayground/AiPlayground/bin/Debug/net8.0/appsettings.json
+/home/balcus/RiderProjects/AiPlayground/AiPlayground/bin/Debug/net8.0/appsettings.Developer.json
