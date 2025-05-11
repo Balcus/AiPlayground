@@ -1,6 +1,6 @@
 namespace AiPlayground.BusinessLogic.AiClient.AiModels.Gemini;
 
-public class SystemInstructions
+public class SystemInstruction
 {
-    
+    public List<Part> parts { get; set; } = [];
 }
