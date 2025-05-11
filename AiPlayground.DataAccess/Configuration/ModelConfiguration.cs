@@ -37,19 +37,19 @@ public class ModelConfiguration : IEntityTypeConfiguration<Model>
             new Model
             {
                 Id = 3,
-                Name = "Gemini 1.5",
+                Name = "gemini-2.0-flash",
                 PlatformId = 3,
             },
             new Model
             {
                 Id = 4,
-                Name = "DeepSeek-R1",
+                Name = "deepseek-reasoner",
                 PlatformId = 2,
             },
             new Model
             {
                 Id = 5,
-                Name = "DeepSeek-V3",
+                Name = "deepseek-chat",
                 PlatformId = 2,
             },
         });

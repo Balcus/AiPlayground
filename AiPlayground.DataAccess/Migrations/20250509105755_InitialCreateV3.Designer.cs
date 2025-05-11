@@ -3,6 +3,7 @@ using AiPlayground.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AiPlayground.DataAccess.Migrations
 {
     [DbContext(typeof(AiPlaygroundContext))]
-    partial class AiPlaygroundContextModelSnapshot : ModelSnapshot
+    [Migration("20250509105755_InitialCreateV3")]
+    partial class InitialCreateV3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

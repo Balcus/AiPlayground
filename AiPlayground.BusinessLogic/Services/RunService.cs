@@ -20,8 +20,7 @@ public class RunService : IRunService
         _modelRepository = modelRepository;
         _promptRepository = promptRepository;
     }
-
-
+    
     public async Task<List<RunDto>> CreateRunsAsync(RunCreateDto runCreateDto)
     {
         var runs = new List<RunDto>();
@@ -40,12 +39,9 @@ public class RunService : IRunService
                 throw new Exception("Model with not found");
             }
             
-            var platformType = (PlatformType)model.PlatformId;
-            if (platformType == PlatformType.OpenAi)
-            {
-                var run = await CreateRunAsync(model, prompt, modelToRun, modelToRun.Temperature);
-                runs.Add(run);
-            }
+            var run = await CreateRunAsync(model, prompt, modelToRun, modelToRun.Temperature);
+            runs.Add(run);
+            
         }
         return runs;
     }
@@ -53,7 +49,7 @@ public class RunService : IRunService
     private async Task<RunDto> CreateRunAsync(Model model, Prompt prompt, ModelRunDto modelToRun, double temperature)
     {
         AiClientFactory factory = new AiClientFactory();
-        OpenAiClient client = (OpenAiClient)factory.GenerateClient(model);
+        IAiClient client = factory.GenerateClient(model);
         string response = await client.GenerateResponseAsync(prompt.SystemMsg, prompt.UserMessage, temperature);
         
         var run = await CreateRun(model.Id, prompt.Id, modelToRun, response, (double)temperature, 0);
@@ -66,7 +62,7 @@ public class RunService : IRunService
             ActualResponse = run.ActualResponse,
             Temp = run.Temp,
             Rating = run.Rating,
-            UserRating = run.UserRating,
+            UserRating = run.UserRating,    
         };
     }
 

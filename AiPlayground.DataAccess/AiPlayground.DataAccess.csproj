@@ -5,7 +5,8 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-    </PropertyGroup>
+      <UserSecretsId>1c437efa-24d6-4c43-8b2a-3c0bdeea8a2a</UserSecretsId>
+  </PropertyGroup>
 
     <ItemGroup>
       <PackageReference Include="EntityFrameworkCore.Exceptions.SqlServer" Version="8.1.3" />

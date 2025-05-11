@@ -4,9 +4,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace NetRomApp.Controllers;
 
-[Route("api")]
+[Route("api/[controller]")]
 [ApiController]
-public class RunsController : ControllerBase
+public class RunsController : Controller
 {
     private readonly IRunService _runService;
     public RunsController(IRunService runService)

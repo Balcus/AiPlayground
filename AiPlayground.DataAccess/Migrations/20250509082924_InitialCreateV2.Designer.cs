@@ -3,6 +3,7 @@ using AiPlayground.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AiPlayground.DataAccess.Migrations
 {
     [DbContext(typeof(AiPlaygroundContext))]
-    partial class AiPlaygroundContextModelSnapshot : ModelSnapshot
+    [Migration("20250509082924_InitialCreateV2")]
+    partial class InitialCreateV2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -59,19 +62,19 @@ namespace AiPlayground.DataAccess.Migrations
                         new
                         {
                             Id = 3,
-                            Name = "gemini-2.0-flash",
+                            Name = "Gemini 1.5",
                             PlatformId = 3
                         },
                         new
                         {
                             Id = 4,
-                            Name = "deepseek-reasoner",
+                            Name = "DeepSeek-R1",
                             PlatformId = 2
                         },
                         new
                         {
                             Id = 5,
-                            Name = "deepseek-chat",
+                            Name = "DeepSeek-V3",
                             PlatformId = 2
                         });
                 });

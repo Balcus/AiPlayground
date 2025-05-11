@@ -4,6 +4,7 @@ using AiPlayground.BusinessLogic.Services;
 using AiPlayground.DataAccess;
 using AiPlayground.DataAccess.Entities;
 using AiPlayground.DataAccess.Repositories;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -25,12 +26,14 @@ builder.Services.AddCors(options =>
 
 builder.Services.AddSwaggerGen(c => {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "AI Playground API", Version = "v1" });
-    
     var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
     var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
     c.IncludeXmlComments(xmlPath);
 });
 
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContext<AiPlaygroundContext>(options =>
+    options.UseSqlServer(connectionString));
 builder.Services.AddScoped<IRepository<Scope>, ScopeRepository>();
 builder.Services.AddScoped<IRepository<Platform>, PlatformRepository>();
 builder.Services.AddScoped<IRepository<Model>, BaseRepository<Model>>();
@@ -42,8 +45,6 @@ builder.Services.AddScoped<IPlatformService, PlatformService>();
 builder.Services.AddScoped<IModelService, ModelService>();
 builder.Services.AddScoped<IPromptService, PromptService>();
 builder.Services.AddScoped<IRunService, RunService>();
-
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
 builder.Services.AddDbContext<AiPlaygroundContext>();
 
