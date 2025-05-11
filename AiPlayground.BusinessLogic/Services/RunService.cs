@@ -1,6 +1,7 @@
 using AiPlayground.BusinessLogic.AiClient;
 using AiPlayground.BusinessLogic.Dto;
 using AiPlayground.BusinessLogic.Enums;
+using AiPlayground.BusinessLogic.Evaluator;
 using AiPlayground.BusinessLogic.Interfaces;
 using AiPlayground.DataAccess.Entities;
 using AiPlayground.DataAccess.Repositories;
@@ -52,7 +53,14 @@ public class RunService : IRunService
         IAiClient client = factory.GenerateClient(model);
         string response = await client.GenerateResponseAsync(prompt.SystemMsg, prompt.UserMessage, temperature);
         
-        var run = await CreateRun(model.Id, prompt.Id, modelToRun, response, (double)temperature, 0);
+        /* THE GRADE WILL TAKE INTO ACCOUNT :
+            - Cosine Similarity between the embeddings of the 2 responses
+            - How much time it took for the AI to give an answer
+            - If it respected the system message
+            - And finally the user score which will be the most important metric
+        */
+        var runGrade = await EmbeddingEvaluator.GetEmbeddingScore(prompt.SystemMsg, response);
+        var run = await CreateRun(model.Id, prompt.Id, modelToRun, response, (double)temperature, runGrade);
 
         return new RunDto
         {

@@ -72,7 +72,7 @@ public class GeminiClient : IAiClient
         }
         catch (Exception e)
         {
-            throw new Exception($"Exception thrown while generating deepseek response: {e.Message}");
+            throw new Exception($"Exception thrown while generating gemini response: {e.Message}");
         }
     }
 }

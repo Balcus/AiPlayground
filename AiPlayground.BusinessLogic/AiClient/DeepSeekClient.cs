@@ -62,6 +62,5 @@ public class DeepSeekClient : IAiClient
         {
             throw new Exception($"Exception thrown while generating deepseek response: {e.Message}");
         }
-        
     }
 }
