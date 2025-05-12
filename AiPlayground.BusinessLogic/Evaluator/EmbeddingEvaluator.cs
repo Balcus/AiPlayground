@@ -16,7 +16,7 @@ public class EmbeddingEvaluator
 
         float similarity = CosineSimilarity(expectedVec, actualVec);
         float grade = similarity * 9 + 1;
-        return similarity;
+        return grade;
     }
 
     public static async Task<List<float>> GetEmbeddingAsync(string input)
