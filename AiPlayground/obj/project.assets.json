@@ -1090,6 +1090,19 @@
           }
         }
       },
+      "Porter2Stemmer/1.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/Porter2Stemmer.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/Porter2Stemmer.dll": {
+            "related": ".pdb;.xml"
+          }
+        }
+      },
       "Swashbuckle.AspNetCore/6.6.2": {
         "type": "package",
         "dependencies": {
@@ -1783,7 +1796,8 @@
         "framework": ".NETCoreApp,Version=v8.0",
         "dependencies": {
           "AiPlayground.DataAccess": "1.0.0",
-          "Azure.AI.OpenAI": "2.1.0"
+          "Azure.AI.OpenAI": "2.1.0",
+          "Porter2Stemmer": "1.0.0"
         },
         "compile": {
           "bin/placeholder/AiPlayground.BusinessLogic.dll": {}
@@ -4028,6 +4042,24 @@
         "lib/netstandard2.0/OpenAI.xml",
         "openai.2.1.0.nupkg.sha512",
         "openai.nuspec"
+      ]
+    },
+    "Porter2Stemmer/1.0.0": {
+      "sha512": "naYdTjvnmUrigtpCzgPSkqbxJ+Zy/y0dB7pH6UZ7mI0QhdU0BcncyzrJu9gArX48KzVWxQVkP/V/SpbWuAqFFw==",
+      "type": "package",
+      "path": "porter2stemmer/1.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.txt",
+        "lib/net452/Porter2Stemmer.dll",
+        "lib/net452/Porter2Stemmer.pdb",
+        "lib/net452/Porter2Stemmer.xml",
+        "lib/netstandard2.0/Porter2Stemmer.dll",
+        "lib/netstandard2.0/Porter2Stemmer.pdb",
+        "lib/netstandard2.0/Porter2Stemmer.xml",
+        "porter2stemmer.1.0.0.nupkg.sha512",
+        "porter2stemmer.nuspec"
       ]
     },
     "Swashbuckle.AspNetCore/6.6.2": {

@@ -13,14 +13,12 @@ public class RunService : IRunService
     private readonly IRepository<Run> _runRepository;
     private readonly IRepository<Model> _modelRepository;
     private readonly IRepository<Prompt> _promptRepository;
-    private readonly Grader _runGrade;
     
     public RunService(IRepository<Run> runRepository, IRepository<Model> modelRepository, IRepository<Prompt> promptRepository)
     {
         _runRepository = runRepository;
         _modelRepository = modelRepository;
         _promptRepository = promptRepository;
-        _runGrade = new Grader();
     }
     
     public async Task<List<RunDto>> CreateRunsAsync(RunCreateDto runCreateDto)
@@ -59,14 +57,7 @@ public class RunService : IRunService
         stopwatch.Stop();
         
         var ts = stopwatch.ElapsedMilliseconds;
-        
-        /* THE GRADE WILL TAKE INTO ACCOUNT :
-            - Cosine Similarity between the embeddings of the 2 responses
-            - How much time it took for the AI to give an answer
-            - If it respected the system message
-            - And finally the user score which will be the most important metric
-        */
-        var grade = await _runGrade.EvaluateRun(prompt.ExpectedResponse, response, ts);
+        var grade = await Grader.EvaluateRun(prompt.ExpectedResponse, response, ts);
         var run = await CreateRun(model.Id, prompt.Id, modelToRun, response, (double)temperature, grade);
 
         return new RunDto

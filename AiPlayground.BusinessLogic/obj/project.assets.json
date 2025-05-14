@@ -634,6 +634,19 @@
           }
         }
       },
+      "Porter2Stemmer/1.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/Porter2Stemmer.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/Porter2Stemmer.dll": {
+            "related": ".pdb;.xml"
+          }
+        }
+      },
       "System.ClientModel/1.2.1": {
         "type": "package",
         "dependencies": {
@@ -2019,6 +2032,24 @@
         "openai.nuspec"
       ]
     },
+    "Porter2Stemmer/1.0.0": {
+      "sha512": "naYdTjvnmUrigtpCzgPSkqbxJ+Zy/y0dB7pH6UZ7mI0QhdU0BcncyzrJu9gArX48KzVWxQVkP/V/SpbWuAqFFw==",
+      "type": "package",
+      "path": "porter2stemmer/1.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.txt",
+        "lib/net452/Porter2Stemmer.dll",
+        "lib/net452/Porter2Stemmer.pdb",
+        "lib/net452/Porter2Stemmer.xml",
+        "lib/netstandard2.0/Porter2Stemmer.dll",
+        "lib/netstandard2.0/Porter2Stemmer.pdb",
+        "lib/netstandard2.0/Porter2Stemmer.xml",
+        "porter2stemmer.1.0.0.nupkg.sha512",
+        "porter2stemmer.nuspec"
+      ]
+    },
     "System.ClientModel/1.2.1": {
       "sha512": "s9+M5El+DXdCRRLzxak8uGBKWT8H/eIssGpFtpaMKdJULrQbBDPH/zFbVyHX+NDczhS5EvjHFbBH9/L+0UhmcA==",
       "type": "package",
@@ -2967,7 +2998,8 @@
   "projectFileDependencyGroups": {
     "net8.0": [
       "AiPlayground.DataAccess >= 1.0.0",
-      "Azure.AI.OpenAI >= 2.1.0"
+      "Azure.AI.OpenAI >= 2.1.0",
+      "Porter2Stemmer >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -3020,6 +3052,10 @@
           "Azure.AI.OpenAI": {
             "target": "Package",
             "version": "[2.1.0, )"
+          },
+          "Porter2Stemmer": {
+            "target": "Package",
+            "version": "[1.0.0, )"
           }
         },
         "imports": [

@@ -9,7 +9,8 @@
       "AiPlayground.BusinessLogic/1.0.0": {
         "dependencies": {
           "AiPlayground.DataAccess": "1.0.0",
-          "Azure.AI.OpenAI": "2.1.0"
+          "Azure.AI.OpenAI": "2.1.0",
+          "Porter2Stemmer": "1.0.0"
         },
         "runtime": {
           "AiPlayground.BusinessLogic.dll": {}
@@ -439,6 +440,14 @@
           "lib/net6.0/OpenAI.dll": {
             "assemblyVersion": "2.1.0.0",
             "fileVersion": "2.1.0.0"
+          }
+        }
+      },
+      "Porter2Stemmer/1.0.0": {
+        "runtime": {
+          "lib/netstandard2.0/Porter2Stemmer.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
           }
         }
       },
@@ -933,6 +942,13 @@
       "sha512": "sha512-zl72nyP4O94ZyEoCLoE8qoc5vp8kSJmRuqR+UdK+jNIjFJGWJYjsb4rAGpMWWRTbPYuk82E8myMJdVQurMLDnQ==",
       "path": "openai/2.1.0",
       "hashPath": "openai.2.1.0.nupkg.sha512"
+    },
+    "Porter2Stemmer/1.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-naYdTjvnmUrigtpCzgPSkqbxJ+Zy/y0dB7pH6UZ7mI0QhdU0BcncyzrJu9gArX48KzVWxQVkP/V/SpbWuAqFFw==",
+      "path": "porter2stemmer/1.0.0",
+      "hashPath": "porter2stemmer.1.0.0.nupkg.sha512"
     },
     "System.ClientModel/1.2.1": {
       "type": "package",

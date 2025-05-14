@@ -51,6 +51,10 @@
             "Azure.AI.OpenAI": {
               "target": "Package",
               "version": "[2.1.0, )"
+            },
+            "Porter2Stemmer": {
+              "target": "Package",
+              "version": "[1.0.0, )"
             }
           },
           "imports": [

@@ -274,3 +274,4 @@
 /home/balcus/RiderProjects/AiPlayground/AiPlayground/bin/Debug/net8.0/OpenAI.dll
 /home/balcus/RiderProjects/AiPlayground/AiPlayground/bin/Debug/net8.0/appsettings.json
 /home/balcus/RiderProjects/AiPlayground/AiPlayground/bin/Debug/net8.0/appsettings.Developer.json
+/home/balcus/RiderProjects/AiPlayground/AiPlayground/bin/Debug/net8.0/Porter2Stemmer.dll
