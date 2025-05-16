@@ -256,12 +256,6 @@
 /home/balcus/RiderProjects/AiPlayground/AiPlayground/obj/Debug/net8.0/staticwebassets.build.json
 /home/balcus/RiderProjects/AiPlayground/AiPlayground/obj/Debug/net8.0/staticwebassets.development.json
 /home/balcus/RiderProjects/AiPlayground/AiPlayground/obj/Debug/net8.0/staticwebassets.build.endpoints.json
-/home/balcus/RiderProjects/AiPlayground/AiPlayground/obj/Debug/net8.0/staticwebassets/msbuild.AiPlayground.Microsoft.AspNetCore.StaticWebAssets.props
-/home/balcus/RiderProjects/AiPlayground/AiPlayground/obj/Debug/net8.0/staticwebassets/msbuild.AiPlayground.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
-/home/balcus/RiderProjects/AiPlayground/AiPlayground/obj/Debug/net8.0/staticwebassets/msbuild.build.AiPlayground.props
-/home/balcus/RiderProjects/AiPlayground/AiPlayground/obj/Debug/net8.0/staticwebassets/msbuild.buildMultiTargeting.AiPlayground.props
-/home/balcus/RiderProjects/AiPlayground/AiPlayground/obj/Debug/net8.0/staticwebassets/msbuild.buildTransitive.AiPlayground.props
-/home/balcus/RiderProjects/AiPlayground/AiPlayground/obj/Debug/net8.0/staticwebassets.pack.json
 /home/balcus/RiderProjects/AiPlayground/AiPlayground/obj/Debug/net8.0/AiPlaygr.527024A9.Up2Date
 /home/balcus/RiderProjects/AiPlayground/AiPlayground/obj/Debug/net8.0/AiPlayground.dll
 /home/balcus/RiderProjects/AiPlayground/AiPlayground/obj/Debug/net8.0/refint/AiPlayground.dll
@@ -275,3 +269,4 @@
 /home/balcus/RiderProjects/AiPlayground/AiPlayground/bin/Debug/net8.0/appsettings.json
 /home/balcus/RiderProjects/AiPlayground/AiPlayground/bin/Debug/net8.0/appsettings.Developer.json
 /home/balcus/RiderProjects/AiPlayground/AiPlayground/bin/Debug/net8.0/Porter2Stemmer.dll
+/home/balcus/RiderProjects/AiPlayground/AiPlayground/obj/Debug/net8.0/staticwebassets.build.json.cache

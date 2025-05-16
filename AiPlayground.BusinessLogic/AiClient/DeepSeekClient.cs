@@ -37,6 +37,7 @@ public class DeepSeekClient : IAiClient
                 }
             },
             Stream = false,
+            Temperature = temperature,
         };
         
         var jsonContent = JsonSerializer.Serialize(content, new JsonSerializerOptions

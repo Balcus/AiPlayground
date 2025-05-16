@@ -44,6 +44,26 @@
             Delete a prompt by scope id
             </summary>
         </member>
+        <member name="M:NetRomApp.Controllers.RunsController.CreateRuns(AiPlayground.BusinessLogic.Dto.RunCreateDto)">
+            <summary>
+            Creates a new Run
+            </summary>
+        </member>
+        <member name="M:NetRomApp.Controllers.RunsController.PatchRun(System.Int32,AiPlayground.BusinessLogic.Dto.RunUpdateDto)">
+            <summary>
+            Patches a run's user rating
+            </summary>
+        </member>
+        <member name="M:NetRomApp.Controllers.RunsController.GetRunsForPromptAsync(System.Int32)">
+            <summary>
+            Fetches all runs for a prompt given its ID
+            </summary>
+        </member>
+        <member name="M:NetRomApp.Controllers.RunsController.GetRunsForModelAsync(System.Int32)">
+            <summary>
+            Fetches all runs for a model given its ID
+            </summary>
+        </member>
         <member name="M:NetRomApp.Controllers.ScopesController.GetPromptsByScopeIdAsync(System.Int32)">
             <summary>
             Fetches all prompts for a scope id

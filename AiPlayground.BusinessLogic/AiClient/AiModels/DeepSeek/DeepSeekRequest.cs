@@ -4,5 +4,6 @@ public class DeepSeekRequest
 {
     public string Model { get; set; } = string.Empty;
     public List<DeepSeekMessage> Messages { get; set; } = [];
+    public double Temperature { get; set; }
     public bool Stream { get; set; } = false;
 }

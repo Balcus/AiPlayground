@@ -10,11 +10,11 @@ namespace AiPlayground.BusinessLogic.Services;
 
 public class RunService : IRunService
 {
-    private readonly IRepository<Run> _runRepository;
+    private readonly IRunRepository _runRepository;
     private readonly IRepository<Model> _modelRepository;
     private readonly IRepository<Prompt> _promptRepository;
     
-    public RunService(IRepository<Run> runRepository, IRepository<Model> modelRepository, IRepository<Prompt> promptRepository)
+    public RunService(IRunRepository runRepository, IRepository<Model> modelRepository, IRepository<Prompt> promptRepository)
     {
         _runRepository = runRepository;
         _modelRepository = modelRepository;
@@ -46,6 +46,52 @@ public class RunService : IRunService
         return runs;
     }
 
+    public async Task<RunDto?> GetRunByIdAsync(int id)
+    {
+        
+        var run = await _runRepository.GetByIdAsync(id);
+
+        if (run == null)
+        {
+            return null;
+        }
+
+        return new RunDto
+        {
+            Id = run.Id,
+            PromptId = run.PromptId,
+            ModelId = run.ModelId,
+            ActualResponse = run.ActualResponse,
+            Temp = run.Temp,
+            Rating = run.Rating,
+            UserRating = run.UserRating,
+        };
+        
+    }
+
+    public async Task<RunDto?> UpdateRunAsync(int id, RunUpdateDto runUpdateDto)
+    {
+        var run  = await _runRepository.GetByIdAsync(id);
+        if (run == null)
+        {
+            return null;
+        }
+
+        run.UserRating = runUpdateDto.UserRaing;
+        var updatedRun = await _runRepository.UpdateAsync(run);
+
+        return new RunDto()
+        {
+            Id = updatedRun.Id,
+            ModelId = updatedRun.ModelId,
+            PromptId = updatedRun.PromptId,
+            ActualResponse = updatedRun.ActualResponse,
+            Temp = updatedRun.Temp,
+            Rating = updatedRun.Rating,
+            UserRating = updatedRun.UserRating,    
+        };
+    }
+
     private async Task<RunDto> CreateRunAsync(Model model, Prompt prompt, ModelRunDto modelToRun, double temperature)
     {
         AiClientFactory factory = new AiClientFactory();
@@ -58,7 +104,7 @@ public class RunService : IRunService
         
         var ts = stopwatch.ElapsedMilliseconds;
         var grade = await Grader.EvaluateRun(prompt.ExpectedResponse, response, ts);
-        var run = await CreateRun(model.Id, prompt.Id, modelToRun, response, (double)temperature, grade);
+        var run = await CreateRun(model.Id, prompt.Id, modelToRun, response, temperature, grade);
 
         return new RunDto
         {
@@ -85,5 +131,45 @@ public class RunService : IRunService
         
         await _runRepository.AddAsync(run);
         return run;
+    }
+
+    public async Task<List<RunDto>> GetRunsForPromptAsync(int promptId)
+    {
+        var result = new List<RunDto>();
+        var runs = await _runRepository.GetAllByPromptId(promptId);
+        foreach (var run in runs)
+        {
+            result.Add(new RunDto
+            {
+                Id = run.Id,
+                PromptId = run.PromptId,
+                ModelId = run.ModelId,
+                ActualResponse = run.ActualResponse,
+                Temp = run.Temp,
+                Rating = run.Rating,
+                UserRating = run.UserRating,
+            });
+        }
+        return result;
+    }
+
+    public async Task<List<RunDto>> GetRunsForModelAsync(int modelId)
+    {
+        var result = new List<RunDto>();
+        var runs = await _runRepository.GetAllByModelId(modelId);
+        foreach (var run in runs)
+        {
+            result.Add(new RunDto
+            {
+                Id = run.Id,
+                PromptId = run.PromptId,
+                ModelId = run.ModelId,
+                ActualResponse = run.ActualResponse,
+                Temp = run.Temp,
+                Rating = run.Rating,
+                UserRating = run.UserRating,
+            });
+        }
+        return result;
     }
 }

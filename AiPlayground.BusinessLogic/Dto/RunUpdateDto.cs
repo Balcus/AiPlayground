@@ -2,5 +2,5 @@ namespace AiPlayground.BusinessLogic.Dto;
 
 public class RunUpdateDto
 {
-    public decimal UserRating { get; set; }
+    public double UserRaing { get; set; }
 }
