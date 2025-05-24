@@ -1,4 +1,3 @@
-using AiPlayground.BusinessLogic.Dto;
 using AiPlayground.BusinessLogic.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 

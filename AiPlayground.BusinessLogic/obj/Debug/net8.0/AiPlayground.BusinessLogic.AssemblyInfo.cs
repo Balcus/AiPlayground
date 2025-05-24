@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AiPlayground.BusinessLogic")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6a2fca491b45e36e097f0f4ebd236c11c2a8a002")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c311e731dae7a49c38e9a5ddc8d1110fc6121008")]
 [assembly: System.Reflection.AssemblyProductAttribute("AiPlayground.BusinessLogic")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AiPlayground.BusinessLogic")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

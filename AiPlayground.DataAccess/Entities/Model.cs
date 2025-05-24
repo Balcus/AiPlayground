@@ -6,7 +6,6 @@ public class Model
     public string Name { get; set; } = string.Empty;
     public int PlatformId { get; set; }
 
-    // why is this virtual ??
     public virtual Platform Platform { get; set; } = null!;
     public ICollection<Run> Runs { get; set; } = new HashSet<Run>();
 }
