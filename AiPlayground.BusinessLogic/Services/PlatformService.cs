@@ -22,6 +22,7 @@ public class PlatformService : IPlatformService
         {
             Id = p.Id,
             Name = p.Name,
+            ImageUrl = p.ImageUrl,
             Models = p.Models.Select(m => new ModelDto
             {
                 Id = m.Id,
@@ -43,6 +44,7 @@ public class PlatformService : IPlatformService
         {
             Id = platform.Id,
             Name = platform.Name,
+            ImageUrl = platform.ImageUrl,
             Models = platform.Models.Select(m => new ModelDto
             {
                 Id = m.Id,

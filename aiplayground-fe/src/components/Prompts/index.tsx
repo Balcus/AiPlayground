@@ -1,9 +1,5 @@
-import { FC } from "react"
+import { FC } from "react";
 
-export const Prompts : FC = () => {
-    return (
-        <>
-            Prompts
-        </>
-    );
-}
+export const Prompts: FC = () => {
+  return <>Prompts</>;
+};

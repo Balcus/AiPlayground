@@ -1,0 +1,39 @@
+.scopes-table-container {
+  border-radius: 20px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+
+.scopes-table-row {
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+
+.scopes-table-row:hover {
+  background-color: #f5f7fa;
+}
+
+.scopes-table-row.selected {
+  background-color: #ffeecf;
+}
+
+.scopes-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #2e3a59;
+}
+
+.scopes-wrapper {
+  padding: 24px;
+  background: #f7f9fb;
+  min-height: 100vh;
+}
+
+.scopes-table-footer {
+  padding: 16px;
+  text-align: center;
+  color: white;
+  font-weight: 500;
+  border-radius: 0 0 20px 20px;
+}

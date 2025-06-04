@@ -10,16 +10,16 @@ import { Scopes } from "../components/Scopes"
 
 export const AppRoutes:FC = () => {
     return(
-    <Routes>
-        <Route path={'/'} element={<App />}>
-            <Route path={'/'} element={<Home />}></Route>
-            <Route path={"/platforms"} element={<Platforms />}></Route>
-            <Route path={"/models"} element={<Models />}></Route>
-            <Route path={"/runs"} element={<Runs />}></Route>
-            <Route path={"/prompts"} element={<Prompts />}></Route>
-            <Route path={"/scopes"} element={<Scopes />}></Route>
-            <Route path={'*'} element={<div>Not found</div>}></Route>
-        </Route>
-    </Routes>
+        <Routes>
+            <Route path={'/'} element={<App />}>
+                <Route path={'/'} element={<Home />}></Route>
+                <Route path={"/platforms"} element={<Platforms />}></Route>
+                <Route path={"/models"} element={<Models />}></Route>
+                <Route path={"/runs"} element={<Runs />}></Route>
+                <Route path={"/prompts"} element={<Prompts />}></Route>
+                <Route path={"/scopes"} element={<Scopes />}></Route>
+                <Route path={'*'} element={<div>Not found</div>}></Route>
+            </Route>
+        </Routes>
     );
 }

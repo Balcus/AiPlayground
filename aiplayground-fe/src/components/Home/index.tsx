@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Box, Button, Card, CardContent, CardMedia, Typography, CardActions } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import "./Home.css";
 
 export const Home: FC = () => {
@@ -17,8 +17,6 @@ export const Home: FC = () => {
                     <Button variant="contained">Learn how</Button>
                 </Box>
             </Box>
-
-            
         </Box>
     );
 };
