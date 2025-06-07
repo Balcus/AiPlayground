@@ -24,7 +24,7 @@ export const ScopesApiClient = {
 
     updateOneAsync(scope: ScopeModel): Promise<ScopeModel> {
         return AiPlaygroundApiClient
-            .put(this.urlPath, scope)
+            .put(this.urlPath + "/" + scope.id, scope)
             .then(response => response.data)
     },
 

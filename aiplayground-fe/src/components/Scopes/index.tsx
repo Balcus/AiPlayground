@@ -24,6 +24,8 @@ import { AddScopePopup } from "../Scopes/AddScopePopup";
 import { EditScopePopup } from "../Scopes/EditScopePopup";
 import { DeleteScopePopup } from "../Scopes/DeleteScopePopup";
 
+// fix change name functionallity
+
 export const Scopes: FC = () => {
   const [scopes, setScopes] = useState<Scope[]>([]);
   const [isLoading, setIsLoading] = useState(false);

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AiPlayground.DataAccess")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+acf2c3cd6d8a1366c768ce749371851e999db079")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c4ac1381315d330799c8cf0ca66c0ab2034ba32f")]
 [assembly: System.Reflection.AssemblyProductAttribute("AiPlayground.DataAccess")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AiPlayground.DataAccess")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

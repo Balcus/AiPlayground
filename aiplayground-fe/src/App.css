@@ -1,3 +1,7 @@
+:root {
+  --brand-color: #c4d413
+}
+
 body {
   margin-left: 5vw;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -7,13 +11,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.app-content {
-  margin-left: 10rem;
-  padding: 20px;
-  min-height: 100vh;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+h1 {
+  color: rgba(0, 0, 0, 0.699);
 }
