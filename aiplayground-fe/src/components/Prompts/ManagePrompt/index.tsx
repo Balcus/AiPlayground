@@ -6,6 +6,7 @@ import {
   Button,
   CircularProgress,
   MenuItem,
+  Slider,
   Stack,
   TextField,
   Typography,
@@ -32,6 +33,10 @@ export const ManagePrompt: FC = () => {
   const [areScopesLoading, setAreScopesLoading] = useState(false);
   const { id } = useParams();
 
+  useEffect(() => {
+    fetchScopes();
+  }, []);
+
   const fetchScopes = async () => {
     try {
       setAreScopesLoading(true);
@@ -49,12 +54,12 @@ export const ManagePrompt: FC = () => {
       return (
         <>
           <h1>
-            Manage prompt: <strong>{id}</strong>
+            View prompt: <strong>{id}</strong> 🧐
           </h1>
         </>
       );
     }
-    return <h1>Create new prompt 👷‍♂️</h1>;
+    return <h1>Create new prompt 👷‍♂️🧰</h1>;
   };
 
   const isFormValid = () => {
@@ -106,10 +111,6 @@ export const ManagePrompt: FC = () => {
     navigate("/prompts");
   };
 
-  useEffect(() => {
-    fetchScopes();
-  }, []);
-
   if (areScopesLoading) {
     return (
       <Stack justifyContent="center" alignItems="center" height="80vh">
@@ -123,18 +124,28 @@ export const ManagePrompt: FC = () => {
       <div className="manage-prompt-form">
         <div className="manage-prompt-title">{computeTitle()}</div>
 
-        <div className="form-field">
-          <Typography variant="h6">Name</Typography>
-          <TextField
-            key="name"
-            id="name"
-            name="name"
-            value={prompt.name}
-            onChange={handleChange}
-            required
-            placeholder="Prompt Name"
-          />
-        </div>
+        {!id && (
+          <div className="form-field">
+            <Typography variant="h6">Name</Typography>
+            <TextField
+              key="name"
+              id="name"
+              name="name"
+              value={prompt.name}
+              onChange={handleChange}
+              required
+              placeholder="Prompt Name"
+              disabled
+            />
+          </div>
+        )}
+
+        {id && (
+          <div className="form-field">
+            <Typography variant="h6">Name</Typography>
+            <Typography>{prompt.name}</Typography>
+          </div>
+        )}
 
         {!id && (
           <div className="form-field">
@@ -158,20 +169,40 @@ export const ManagePrompt: FC = () => {
           </div>
         )}
 
-        <div className="form-field">
-          <Typography variant="h6">System Message</Typography>
-          <TextField
-            key="systemMsg"
-            id="systemMsg"
-            name="systemMsg"
-            value={prompt.systemMsg}
-            multiline
-            rows={1}
-            onChange={handleChange}
-            required
-            placeholder="Instructions for Ai Agent"
-          />
-        </div>
+        {!id && (
+          <div className="form-field">
+            <Typography variant="h6">System Message</Typography>
+            <TextField
+              key="systemMsg"
+              id="systemMsg"
+              name="systemMsg"
+              value={prompt.systemMsg}
+              multiline
+              rows={1}
+              onChange={handleChange}
+              required
+              placeholder="Instructions for Ai Agent"
+            />
+          </div>
+        )}
+
+        {id && (
+          <div className="form-field">
+            <Typography variant="h6">System Message</Typography>
+            <TextField
+              key="systemMsg"
+              id="systemMsg"
+              name="systemMsg"
+              value={prompt.systemMsg}
+              multiline
+              rows={1}
+              onChange={handleChange}
+              required
+              placeholder={prompt.systemMsg}
+              disabled
+            />
+          </div>
+        )}
 
         <div className="form-field">
           <Typography variant="h6">User Message</Typography>
@@ -200,6 +231,20 @@ export const ManagePrompt: FC = () => {
             onChange={handleChange}
             required
             placeholder="Expected Response"
+          />
+        </div>
+
+        <div className="temp-slider">
+          <Typography variant="h6">Set temperature 🌡️</Typography>
+          <Slider
+            aria-label="Temperature"
+            defaultValue={0.7}
+            shiftStep={0.1}
+            min={0}
+            max={2}
+            step={0.1}
+            marks
+            valueLabelDisplay="auto"
           />
         </div>
 

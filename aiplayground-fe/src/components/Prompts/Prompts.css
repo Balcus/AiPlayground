@@ -32,6 +32,6 @@
   border-radius: 0 0 1rem 1rem;
   padding: 1rem;
   text-align: center;
-  background-color: #480c44;
+  background-color: var(--brand-color);
   color: #f2f1ef !important;
 }

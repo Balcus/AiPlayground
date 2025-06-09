@@ -2,26 +2,27 @@ import {
   Box,
   IconButton,
   Paper,
-  Stack,
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableRow,
+  Typography,
 } from "@mui/material";
 import { FC, useEffect, useState } from "react";
 import "./Prompts.css";
-import AddCircle from "@mui/icons-material/AddCircle";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { EmptyTableRow } from "../Common/EmptyTableRow";
 import { LoadingRow } from "../Common/LoadingRow";
 import { TableHeader } from "../Common/TableHeader";
-import { renderLabelDisplayedRows } from "../Shared/Utils/table.util";
 import { Prompt } from "../Shared/Types/Prompt";
 import { Delete } from "@mui/icons-material";
 import { PromptsApiClient } from "../../api/Clients/PromptsApiclient";
 import { PromptModel } from "../../api/Models/PromptModel";
 import { DeletePopup } from "../Common/DeletePopup";
 import { useNavigate } from "react-router-dom";
+import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
+import { ExpandableText } from "../Common/ExpandableText";
 
 export const Prompts: FC = () => {
   const navigate = useNavigate();
@@ -36,16 +37,32 @@ export const Prompts: FC = () => {
 
   const renderActions = (prompt: Prompt) => {
     return (
-      <>
+      <Box
+        sx={{
+          display: "flex",
+          gap: "8px",
+          justifyContent: "center",
+          width: "100%",
+        }}
+      >
         <IconButton
+          size="small"
+          onClick={() => {
+            navigate(`view/${prompt.id}`);
+          }}
+        >
+          <RemoveRedEyeIcon fontSize="small" />
+        </IconButton>
+        <IconButton
+          size="small"
           onClick={() => {
             setPromptToDelete(prompt);
             setOpenDeletePopup(true);
           }}
         >
-          <Delete color="primary" fontSize="large" />
+          <Delete fontSize="small" />
         </IconButton>
-      </>
+      </Box>
     );
   };
 
@@ -102,44 +119,81 @@ export const Prompts: FC = () => {
   };
 
   return (
-    <>
-      <Box className="prompts-wrapper">
-        <Stack
-          flexDirection={"row"}
-          justifyContent={"center"}
-          alignItems={"center"}
-        >
-          <Box className="prompts-title">Prompts</Box>
-        </Stack>
+    <Box
+      sx={{
+        paddingLeft: "4rem",
+        paddingRight: "6rem",
+        paddingTop: "1.5rem",
+        paddingBottom: "1.5rem",
+      }}
+    >
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          marginBottom: "16px",
+          borderBottom: "1px solid #e0e0e0",
+          paddingBottom: "16px",
+        }}
+      >
         <Box>
-          <Box>
-            <IconButton onClick={handleCreatePrompt}>
-              <AddCircle color="primary" fontSize="large" />
-            </IconButton>
-          </Box>
+          <Typography variant="h5" component="h1" fontWeight="bold">
+            Prompts
+          </Typography>
+          <Typography variant="body1" color="text.secondary">
+            {prompts.length} Items
+          </Typography>
         </Box>
+        <IconButton onClick={handleCreatePrompt}>
+          <AddCircleIcon />
+        </IconButton>
       </Box>
 
-      <TableContainer component={Paper} className={"prompts-table-container"}>
+      <TableContainer
+        component={Paper}
+        sx={{
+          boxShadow: "none",
+          border: "1px solid #e0e0e0",
+          borderRadius: "4px",
+        }}
+      >
         <Table>
           <TableHeader columns={columns} />
           <TableBody>
             {prompts && prompts.length ? (
-              <>
-                {prompts.map((prompt: Prompt, index: number) => (
-                  <TableRow key={index} className={"prompts-table-row"}>
-                    <TableCell align="center">{prompt.name}</TableCell>
-                    <TableCell align="center">{prompt.systemMsg}</TableCell>
-                    <TableCell align="center">{prompt.userMessage}</TableCell>
-                    <TableCell align="center">
-                      {prompt.expectedResponse}
-                    </TableCell>
-                    <TableCell align="center">
-                      {renderActions(prompt)}
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </>
+              prompts.map((prompt: Prompt, index: number) => (
+                <TableRow
+                  key={index}
+                  hover
+                  sx={{ "&:last-child td": { borderBottom: 0 } }}
+                >
+                  <TableCell align="center">
+                    <ExpandableText text={prompt.name} maxLength={20} />
+                  </TableCell>
+                  <TableCell align="center">
+                    <ExpandableText text={prompt.systemMsg} maxLength={20} />
+                  </TableCell>
+                  <TableCell align="center">
+                    <ExpandableText text={prompt.userMessage} maxLength={20} />
+                  </TableCell>
+                  <TableCell align="center">
+                    <ExpandableText
+                      text={prompt.expectedResponse}
+                      maxLength={20}
+                    />
+                  </TableCell>
+                  <TableCell
+                    align="center"
+                    sx={{
+                      padding: "1rem 1rem",
+                      width: "150px",
+                    }}
+                  >
+                    {renderActions(prompt)}
+                  </TableCell>
+                </TableRow>
+              ))
             ) : isLoading ? (
               <LoadingRow />
             ) : (
@@ -148,9 +202,7 @@ export const Prompts: FC = () => {
           </TableBody>
         </Table>
       </TableContainer>
-      <Box className={"prompts-table-footer"}>
-        {renderLabelDisplayedRows(prompts.length, "prompts")}
-      </Box>
+
       <DeletePopup
         entityTitle={promptToDelete?.name ?? "Unknown"}
         open={openDeletePopup}
@@ -166,6 +218,6 @@ export const Prompts: FC = () => {
           setPromptToDelete(undefined);
         }}
       />
-    </>
+    </Box>
   );
 };
