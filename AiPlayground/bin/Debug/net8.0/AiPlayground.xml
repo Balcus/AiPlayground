@@ -44,6 +44,11 @@
             Delete a prompt by scope id
             </summary>
         </member>
+        <member name="M:NetRomApp.Controllers.RunsController.GetAllAsync">
+            <summary>
+            Returns all runs
+            </summary>
+        </member>
         <member name="M:NetRomApp.Controllers.RunsController.CreateRuns(AiPlayground.BusinessLogic.Dto.RunCreateDto)">
             <summary>
             Creates a new Run

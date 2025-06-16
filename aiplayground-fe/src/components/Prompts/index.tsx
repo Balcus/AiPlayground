@@ -21,7 +21,7 @@ import { PromptsApiClient } from "../../api/Clients/PromptsApiclient";
 import { PromptModel } from "../../api/Models/PromptModel";
 import { DeletePopup } from "../Common/DeletePopup";
 import { useNavigate } from "react-router-dom";
-import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
+import SettingsIcon from "@mui/icons-material/Settings";
 import { ExpandableText } from "../Common/ExpandableText";
 
 export const Prompts: FC = () => {
@@ -51,7 +51,7 @@ export const Prompts: FC = () => {
             navigate(`view/${prompt.id}`);
           }}
         >
-          <RemoveRedEyeIcon fontSize="small" />
+          <SettingsIcon fontSize="small" />
         </IconButton>
         <IconButton
           size="small"

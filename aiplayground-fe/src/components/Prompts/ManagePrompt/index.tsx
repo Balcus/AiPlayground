@@ -6,7 +6,6 @@ import {
   Button,
   CircularProgress,
   MenuItem,
-  Slider,
   Stack,
   TextField,
   Typography,
@@ -17,13 +16,15 @@ import { Prompt } from "../../Shared/Types/Prompt";
 import { PromptCreate } from "../../Shared/Types/PromptCreate";
 import { Scope } from "../../Shared/Types/Scope";
 import { PromptsApiClient } from "../../../api/Clients/PromptsApiclient";
+import { RunConfig } from "../RunConfig";
+import { PromptCreateModel } from "../../../api/Models/PromptCreateModel";
 
-const DEFAULT_PROMPT: PromptCreate = {
-  scopeId: 0,
-  name: "",
-  systemMsg: "",
-  userMessage: "",
-  expectedResponse: "",
+const DEFAULT_PROMPT: Prompt = {
+  id: undefined,
+  name: undefined,
+  systemMsg: undefined,
+  userMessage: undefined,
+  expectedResponse: undefined,
 };
 
 export const ManagePrompt: FC = () => {
@@ -31,11 +32,9 @@ export const ManagePrompt: FC = () => {
   const [prompt, setPrompt] = useState<Prompt | PromptCreate>(DEFAULT_PROMPT);
   const [scopes, setScopes] = useState<Scope[]>([]);
   const [areScopesLoading, setAreScopesLoading] = useState(false);
+  const [errors, setErrors] = useState<{ [key: string]: string }>({});
+  const [promptLoading, setPromptLoading] = useState(false);
   const { id } = useParams();
-
-  useEffect(() => {
-    fetchScopes();
-  }, []);
 
   const fetchScopes = async () => {
     try {
@@ -49,12 +48,33 @@ export const ManagePrompt: FC = () => {
     }
   };
 
-  const computeTitle = () => {
+  const fetchPrompt = async (promptId: string) => {
+    try {
+      setPromptLoading(true);
+      const response = await PromptsApiClient.getOneAsync(parseInt(promptId));
+      if (response) {
+        setPrompt(response as Prompt);
+      }
+      setPromptLoading(false);
+    } catch (error) {
+      console.error("Error fetching prompt:", error);
+    }
+  };
+
+  useEffect(() => {
     if (id) {
+      fetchPrompt(id);
+    } else {
+      fetchScopes();
+    }
+  }, []);
+
+  const computeTitle = () => {
+    if (id && prompt) {
       return (
         <>
           <h1>
-            View prompt: <strong>{id}</strong> 🧐
+            View prompt: <strong>{prompt.name}</strong> 🧐
           </h1>
         </>
       );
@@ -71,7 +91,8 @@ export const ManagePrompt: FC = () => {
       prompt.expectedResponse && prompt.expectedResponse.trim().length > 0;
 
     if (!id) {
-      const hasScopeId = (prompt as PromptCreate).scopeId > 0;
+      const scopeId = (prompt as PromptCreate).scopeId;
+      const hasScopeId = typeof scopeId === "number" && scopeId > 0;
       return (
         hasName &&
         hasSystemMsg &&
@@ -84,13 +105,32 @@ export const ManagePrompt: FC = () => {
     return hasName && hasSystemMsg && hasUserMessage && hasExpectedResponse;
   };
 
+  const validateField = (name: string, value: string) => {
+    const isEmpty = (val: string) =>
+      val === null || val === undefined || String(val).trim() === "";
+    switch (name) {
+      case "name":
+        return isEmpty(value) ? "Name is required" : "";
+      case "scopeId":
+        return isEmpty(value) ? "Scope is required" : "";
+      case "systemMsg":
+        return isEmpty(value) ? "systemMsg is required" : "";
+      case "userMessage":
+        return isEmpty(value) ? "userMessage is required" : "";
+      case "expectedResponse":
+        return isEmpty(value) ? "expectedResponse is required" : "";
+      default:
+        return "";
+    }
+  };
+
   const handleSave = async () => {
     if (!isFormValid()) {
       return;
     }
 
     try {
-      await PromptsApiClient.createOneAsync(prompt);
+      await PromptsApiClient.createOneAsync(prompt as PromptCreateModel);
       navigate("/prompts");
     } catch (error: any) {
       console.log("Error saving prompt:", error);
@@ -103,6 +143,11 @@ export const ManagePrompt: FC = () => {
     const { name, value } = event.target;
     setPrompt((prevPrompt) => {
       const updatedPrompt = { ...prevPrompt, [name]: value };
+      const fieldError = validateField(name, value);
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        [name]: fieldError,
+      }));
       return updatedPrompt;
     });
   };
@@ -119,33 +164,49 @@ export const ManagePrompt: FC = () => {
     );
   }
 
+  const validateForm = (): boolean => {
+    const requiredFields = [
+      "name",
+      "systemMsg",
+      "userMessage",
+      "expectedResult",
+      "scopeId",
+    ];
+
+    const newErrors: { [key: string]: string } = {};
+
+    let isValid = true;
+    for (const field of requiredFields) {
+      const value = (prompt as any)[field];
+      const error = validateField(field, value);
+      if (error) {
+        newErrors[field] = error;
+        isValid = false;
+      }
+    }
+
+    setErrors(newErrors);
+    return isValid;
+  };
+
   return (
     <Box className="manage-prompt-wrapper">
       <div className="manage-prompt-form">
         <div className="manage-prompt-title">{computeTitle()}</div>
 
-        {!id && (
-          <div className="form-field">
-            <Typography variant="h6">Name</Typography>
-            <TextField
-              key="name"
-              id="name"
-              name="name"
-              value={prompt.name}
-              onChange={handleChange}
-              required
-              placeholder="Prompt Name"
-              disabled
-            />
-          </div>
-        )}
-
-        {id && (
-          <div className="form-field">
-            <Typography variant="h6">Name</Typography>
-            <Typography>{prompt.name}</Typography>
-          </div>
-        )}
+        <div className="form-field">
+          <Typography variant="h6">Name</Typography>
+          <TextField
+            key="name"
+            id="name"
+            name="name"
+            value={prompt.name}
+            onChange={handleChange}
+            required
+            placeholder="Prompt Name"
+            disabled={!!id}
+          />
+        </div>
 
         {!id && (
           <div className="form-field">
@@ -169,40 +230,21 @@ export const ManagePrompt: FC = () => {
           </div>
         )}
 
-        {!id && (
-          <div className="form-field">
-            <Typography variant="h6">System Message</Typography>
-            <TextField
-              key="systemMsg"
-              id="systemMsg"
-              name="systemMsg"
-              value={prompt.systemMsg}
-              multiline
-              rows={1}
-              onChange={handleChange}
-              required
-              placeholder="Instructions for Ai Agent"
-            />
-          </div>
-        )}
-
-        {id && (
-          <div className="form-field">
-            <Typography variant="h6">System Message</Typography>
-            <TextField
-              key="systemMsg"
-              id="systemMsg"
-              name="systemMsg"
-              value={prompt.systemMsg}
-              multiline
-              rows={1}
-              onChange={handleChange}
-              required
-              placeholder={prompt.systemMsg}
-              disabled
-            />
-          </div>
-        )}
+        <div className="form-field">
+          <Typography variant="h6">System Message</Typography>
+          <TextField
+            key="systemMsg"
+            id="systemMsg"
+            name="systemMsg"
+            value={prompt.systemMsg}
+            multiline
+            rows={1}
+            onChange={handleChange}
+            required
+            placeholder="Instructions for Ai Agent"
+            disabled={!!id}
+          />
+        </div>
 
         <div className="form-field">
           <Typography variant="h6">User Message</Typography>
@@ -216,6 +258,7 @@ export const ManagePrompt: FC = () => {
             onChange={handleChange}
             required
             placeholder="Question"
+            disabled={!!id}
           />
         </div>
 
@@ -231,20 +274,7 @@ export const ManagePrompt: FC = () => {
             onChange={handleChange}
             required
             placeholder="Expected Response"
-          />
-        </div>
-
-        <div className="temp-slider">
-          <Typography variant="h6">Set temperature 🌡️</Typography>
-          <Slider
-            aria-label="Temperature"
-            defaultValue={0.7}
-            shiftStep={0.1}
-            min={0}
-            max={2}
-            step={0.1}
-            marks
-            valueLabelDisplay="auto"
+            disabled={!!id}
           />
         </div>
 
@@ -264,6 +294,13 @@ export const ManagePrompt: FC = () => {
           </div>
         )}
       </div>
+
+      {id && (
+        <div className="run-config-wrapper">
+          <Typography variant="h6">Run Section</Typography>
+          <RunConfig />
+        </div>
+      )}
     </Box>
   );
 };

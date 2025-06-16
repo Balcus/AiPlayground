@@ -15,7 +15,10 @@ export const TableHeader: FC<TableHeaderProps> = ({
 }: TableHeaderProps) => {
   return (
     <TableHead>
-      <TableRow className={"table-header"} sx={{ backgroundColor: "primary.main" }}>
+      <TableRow
+        className={"table-header"}
+        sx={{ backgroundColor: "primary.main" }}
+      >
         {columns.map((column) => (
           <TableCell key={column.id}>{column.label}</TableCell>
         ))}

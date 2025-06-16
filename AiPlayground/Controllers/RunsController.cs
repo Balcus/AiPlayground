@@ -15,6 +15,16 @@ public class RunsController : Controller
     }
 
     /// <summary>
+    /// Returns all runs
+    /// </summary>
+    [HttpGet]
+    public async Task<IActionResult> GetAllAsync()
+    {
+        var runs = await _runService.GetAllAsync();
+        return Ok(runs);
+    }
+
+    /// <summary>
     /// Creates a new Run
     /// </summary>
     [HttpPost]

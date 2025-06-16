@@ -5,4 +5,5 @@ export interface PromptModel extends ModelBase<number> {
     systemMsg: string;
     userMessage: string;
     expectedResponse: string;
+    scopeId: number;
 }

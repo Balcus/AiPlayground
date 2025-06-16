@@ -1,5 +1,5 @@
 export type PromptCreate = {
-    scopeId: number;
+    scopeId?: number;
     name: string;
     systemMsg: string;
     userMessage: string;

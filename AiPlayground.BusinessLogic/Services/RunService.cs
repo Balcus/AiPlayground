@@ -20,7 +20,28 @@ public class RunService : IRunService
         _modelRepository = modelRepository;
         _promptRepository = promptRepository;
     }
-    
+
+    public async Task<List<RunDto>> GetAllAsync()
+    {
+
+        var result = new List<RunDto>();
+        var runs = await _runRepository.GetAllAsync();
+
+        foreach (var run in runs )
+        {
+            result.Add(new RunDto
+            {
+                Id = run.Id,
+                Rating = run.Rating,
+                ActualResponse = run.ActualResponse,
+                UserRating = run.UserRating,
+                ModelId = run.ModelId,
+                PromptId = run.PromptId,
+            });
+        }
+        return result;
+    }
+
     public async Task<List<RunDto>> CreateRunsAsync(RunCreateDto runCreateDto)
     {
         var runs = new List<RunDto>();
@@ -36,7 +57,7 @@ public class RunService : IRunService
             var model = await _modelRepository.GetByIdAsync(modelToRun.ModelId);
             if (model == null)
             {
-                throw new Exception("Model with not found");
+                throw new Exception("Model with the given Id not found");
             }
             
             var run = await CreateRunAsync(model, prompt, modelToRun, modelToRun.Temperature);

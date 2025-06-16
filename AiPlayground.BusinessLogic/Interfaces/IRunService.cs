@@ -6,6 +6,7 @@ namespace AiPlayground.BusinessLogic.Interfaces;
 
 public interface IRunService
 {
+    Task<List<RunDto>> GetAllAsync();
     Task<List<RunDto>> CreateRunsAsync(RunCreateDto runCreateDto);
     Task<RunDto?> GetRunByIdAsync(int runId);
     Task<RunDto?> UpdateRunAsync(int id, RunUpdateDto runUpdateDto);

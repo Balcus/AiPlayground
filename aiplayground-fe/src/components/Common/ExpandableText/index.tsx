@@ -3,7 +3,7 @@ import { Box, Tooltip, Collapse, IconButton } from "@mui/material";
 import { FC, useState } from "react";
 
 interface Props {
-  text: string;
+  text?: string;
   maxLength: number;
 }
 
