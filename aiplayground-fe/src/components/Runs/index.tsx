@@ -1,36 +1,45 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect, useState, useMemo } from "react";
 import "./Runs.css";
 import { RunsApiClient } from "../../api/Clients/RunsApiClient";
+import { ModelsApiClient } from "../../api/Clients/ModelsApiClient";
 import {
   Box,
   Button,
   IconButton,
   Paper,
   Popover,
-  Stack,
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableRow,
   TextField,
+  Typography,
 } from "@mui/material";
 import { Star } from "@mui/icons-material";
 import { RunGetModel } from "../../api/Models/RunGetModel";
-import { TableHeader } from "../Common/TableHeader";
-import { LoadingRow } from "../Common/LoadingRow";
-import { renderLabelDisplayedRows } from "../Shared/Utils/table.util";
 import { EmptyTableRow } from "../Common/EmptyTableRow";
+import { LoadingRow } from "../Common/LoadingRow";
+import { TableHeader } from "../Common/TableHeader";
 import { RunGet } from "../Shared/Types/RunGet";
+import { Prompt } from "../Shared/Types/Prompt";
+import { Model } from "../Shared/Types/Model";
+import { PromptsApiClient } from "../../api/Clients/PromptsApiclient";
+import { SearchColumn, SearchBar } from "../Common/ColumnSearchBar";
+import { ExpandableText } from "../Common/ExpandableText";
 
 export const Runs: FC = () => {
   const [runs, setRuns] = useState<RunGet[]>([]);
+  const [prompts, setPrompts] = useState<Prompt[]>([]);
+  const [models, setModels] = useState<Model[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [ratingValue, setRatingValue] = useState<number | "">("");
   const [selectedRunId, setSelectedRunId] = useState<number | null>(null);
+  const [selectedColumn, setSelectedColumn] = useState<string>("promptName");
+  const [searchValue, setSearchValue] = useState<string>("");
 
-  const columns = [
+  const columns: SearchColumn[] = [
     {
       id: "id",
       label: "Id",
@@ -42,10 +51,12 @@ export const Runs: FC = () => {
     {
       id: "expectedResult",
       label: "Expected result",
+      searchable: false,
     },
     {
       id: "actualResult",
       label: "Actual result",
+      searchable: false,
     },
     {
       id: "model",
@@ -54,16 +65,102 @@ export const Runs: FC = () => {
     {
       id: "rating",
       label: "Rating",
+      searchable: false,
     },
     {
       id: "userRating",
       label: "User rating",
+      searchable: false,
     },
     {
       id: "actions",
       label: "Actions",
+      searchable: false,
     },
   ];
+
+  const filteredRuns = useMemo(() => {
+    if (!searchValue.trim()) {
+      return runs;
+    }
+
+    const searchTerm = searchValue.toLowerCase().trim();
+
+    return runs.filter((run) => {
+      let fieldValue = "";
+
+      switch (selectedColumn) {
+        case "id":
+          fieldValue = run.id?.toString() || "";
+          break;
+        case "promptName":
+          fieldValue = run.prompt?.name || "";
+          break;
+        case "model":
+          fieldValue = run.model?.name || "";
+          break;
+        default:
+          return false;
+      }
+
+      const result = fieldValue.toLowerCase().includes(searchTerm);
+      return result;
+    });
+  }, [runs, selectedColumn, searchValue]);
+
+  const fetchPrompts = async (): Promise<Prompt[]> => {
+    try {
+      const res = await PromptsApiClient.getAllAsync();
+      return res;
+    } catch (error: any) {
+      console.log("Error fetching prompts:", error);
+      return [];
+    }
+  };
+
+  const fetchModels = async (): Promise<Model[]> => {
+    try {
+      const res = await ModelsApiClient.getAllAsync();
+      return res;
+    } catch (error: any) {
+      console.log("Error fetching models:", error);
+      return [];
+    }
+  };
+
+  const mapRunsWithPromptsAndModels = (
+    runs: any[],
+    prompts: Prompt[],
+    models: Model[]
+  ): RunGet[] => {
+    return runs.map((run) => {
+      const promptId = run.promptId || run.prompt?.id;
+      const matchingPrompt = prompts.find((prompt) => prompt.id === promptId);
+
+      const modelId = run.modelId || run.model?.id;
+      const matchingModel = models.find((model) => model.id === modelId);
+
+      return {
+        ...run,
+        prompt: matchingPrompt
+          ? {
+              id: matchingPrompt.id,
+              name: matchingPrompt.name,
+              expectedResponse: matchingPrompt.expectedResponse,
+              systemMsg: matchingPrompt.systemMsg,
+              userMessage: matchingPrompt.userMessage,
+            }
+          : null,
+        model: matchingModel
+          ? {
+              id: matchingModel.id,
+              name: matchingModel.name,
+              averageRating: matchingModel.averageRating,
+            }
+          : null,
+      } as RunGet;
+    });
+  };
 
   const fetchRuns = async () => {
     try {
@@ -71,13 +168,30 @@ export const Runs: FC = () => {
 
       const res = await RunsApiClient.getAllAsync();
 
-      const fetchedRuns = res.map((e: RunGetModel) => ({ ...e } as RunGet));
+      if (res.length > 0 && res[0].model && res[0].prompt) {
+        const fetchedRuns = res.map((e: RunGetModel) => ({ ...e } as RunGet));
+        setRuns(fetchedRuns);
+      } else {
+        const [promptsRes, modelsRes] = await Promise.all([
+          fetchPrompts(),
+          fetchModels(),
+        ]);
 
-      setRuns(fetchedRuns);
+        setPrompts(promptsRes);
+        setModels(modelsRes);
+
+        const mappedRuns = mapRunsWithPromptsAndModels(
+          res,
+          promptsRes,
+          modelsRes
+        );
+        setRuns(mappedRuns);
+      }
 
       setIsLoading(false);
     } catch (error: any) {
-      console.log(error);
+      console.log("Error fetching runs:", error);
+      setIsLoading(false);
     }
   };
 
@@ -102,12 +216,23 @@ export const Runs: FC = () => {
       if (
         selectedRunId != null &&
         ratingValue !== "" &&
-        ratingValue >= 0 &&
-        ratingValue <= 100
+        ratingValue >= 1 &&
+        ratingValue <= 10
       ) {
-        await RunsApiClient.rateAsync(selectedRunId, ratingValue);
-        await fetchRuns();
-        handleClose();
+        try {
+          await RunsApiClient.rateAsync(selectedRunId, ratingValue);
+          await fetchRuns();
+
+          setRuns((prevRuns) =>
+            prevRuns.map((r) =>
+              r.id === selectedRunId ? { ...r, userRating: ratingValue } : r
+            )
+          );
+
+          handleClose();
+        } catch (error: any) {
+          console.log("Error rating run:", error);
+        }
       }
     };
 
@@ -133,22 +258,22 @@ export const Runs: FC = () => {
             }}
           >
             <TextField
-              label="Rating (0-100)"
+              label="Rating (1-10)"
               type="number"
               fullWidth
               value={ratingValue}
               onChange={(e) => setRatingValue(Number(e.target.value))}
               slotProps={{
                 htmlInput: {
-                  min: 0,
-                  max: 100,
+                  min: 1,
+                  max: 10,
                 },
               }}
             />
             <Button
               onClick={handleGiveRating}
               disabled={
-                ratingValue === "" || ratingValue < 0 || ratingValue > 100
+                ratingValue === "" || ratingValue < 1 || ratingValue > 10
               }
             >
               Submit
@@ -164,52 +289,111 @@ export const Runs: FC = () => {
   }, []);
 
   return (
-    <Box className={"runs-wrapper"}>
-      <Stack flexDirection="row" justifyContent="center" alignItems="center">
-        <Box className={"runs-title"}>Runs</Box>
-      </Stack>
-
-      <Box>
-        <TableContainer component={Paper} className={"runs-table-container"}>
-          <Table>
-            <TableHeader columns={columns} />
-            <TableBody>
-              {runs && runs.length ? (
-                <>
-                  {runs.map((run: RunGet, index: number) => (
-                    <TableRow key={index} className={"runs-table-row"}>
-                      <TableCell align="center">{run.id}</TableCell>
-                      <TableCell align="center">
-                        {/* TODO Temp solution until I fix the backend */}
-                        {run.prompt?.name ?? ""}
-                      </TableCell>
-                      <TableCell align="center">
-                        {/* TODO Temp solution until I fix the backend */}
-                        {run.prompt?.expectedResponse ?? ""}
-                      </TableCell>
-                      <TableCell align="center">{run.actualResponse}</TableCell>
-                      <TableCell align="center">
-                        {/* TODO Temp solution until I fix the backend */}
-                        {run.model?.name ?? ""}
-                      </TableCell>
-                      <TableCell align="center">{run.rating}</TableCell>
-                      <TableCell align="center">{run.userRating}</TableCell>
-                      <TableCell align="center">{renderActions(run)}</TableCell>
-                    </TableRow>
-                  ))}
-                </>
-              ) : isLoading ? (
-                <LoadingRow />
-              ) : (
-                <EmptyTableRow />
-              )}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        <Box className={"runs-table-footer"}>
-          {renderLabelDisplayedRows(runs.length, "runs")}
+    <Box
+      sx={{
+        paddingLeft: "4rem",
+        paddingRight: "6rem",
+        paddingTop: "1.5rem",
+        paddingBottom: "1.5rem",
+      }}
+    >
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          marginBottom: "16px",
+          borderBottom: "1px solid #e0e0e0",
+          paddingBottom: "16px",
+        }}
+      >
+        <Box>
+          <Typography variant="h5" component="h1" fontWeight="bold">
+            Runs
+          </Typography>
+          <Typography variant="body1" color="text.secondary">
+            {filteredRuns.length} of {runs.length} Items
+          </Typography>
         </Box>
       </Box>
+
+      <SearchBar
+        columns={columns}
+        selectedColumn={selectedColumn}
+        searchValue={searchValue}
+        onColumnChange={setSelectedColumn}
+        onSearchChange={setSearchValue}
+        placeholder="Search runs..."
+      />
+
+      <TableContainer
+        component={Paper}
+        sx={{
+          boxShadow: "none",
+          border: "1px solid #e0e0e0",
+          borderRadius: "4px",
+        }}
+      >
+        <Table>
+          <TableHeader columns={columns} />
+          <TableBody>
+            {filteredRuns && filteredRuns.length ? (
+              filteredRuns.map((run: RunGet, index: number) => (
+                <TableRow
+                  key={index}
+                  hover
+                  sx={{ "&:last-child td": { borderBottom: 0 } }}
+                >
+                  <TableCell align="center" sx={{ padding: "1rem 1rem" }}>
+                    {run.id}
+                  </TableCell>
+                  <TableCell align="center" sx={{ padding: "1rem 1rem" }}>
+                    {run.prompt?.name ?? ""}
+                  </TableCell>
+                  <TableCell align="center" sx={{ padding: "1rem 1rem" }}>
+                    <ExpandableText
+                      text={run.prompt.expectedResponse}
+                      maxLength={20}
+                    />
+                  </TableCell>
+                  <TableCell align="center" sx={{ padding: "1rem 1rem" }}>
+                    <ExpandableText text={run.actualResponse} maxLength={20} />
+                  </TableCell>
+                  <TableCell align="center" sx={{ padding: "1rem 1rem" }}>
+                    {run.model?.name ?? ""}
+                  </TableCell>
+                  <TableCell align="center" sx={{ padding: "1rem 1rem" }}>
+                    {run.rating}
+                  </TableCell>
+                  <TableCell align="center" sx={{ padding: "1rem 1rem" }}>
+                    {run.userRating}
+                  </TableCell>
+                  <TableCell
+                    align="center"
+                    sx={{
+                      padding: "1rem 1rem",
+                      width: "150px",
+                    }}
+                  >
+                    {renderActions(run)}
+                  </TableCell>
+                </TableRow>
+              ))
+            ) : isLoading ? (
+              <LoadingRow />
+            ) : searchValue ? (
+              <TableRow>
+                <TableCell colSpan={columns.length} align="center">
+                  No results found for "{searchValue}" in{" "}
+                  {columns.find((col) => col.id === selectedColumn)?.label}
+                </TableCell>
+              </TableRow>
+            ) : (
+              <EmptyTableRow />
+            )}
+          </TableBody>
+        </Table>
+      </TableContainer>
     </Box>
   );
 };

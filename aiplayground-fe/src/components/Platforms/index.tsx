@@ -22,10 +22,13 @@ import { Model } from "../Shared/Types/Model";
 import { Platform } from "../Shared/Types/Platform";
 import "./Platforms.css";
 import { FC, useEffect, useState } from "react";
+import { RunGet } from "../Shared/Types/RunGet";
+import { RunsApiClient } from "../../api/Clients/RunsApiClient";
 
 export const Platforms: FC = () => {
   const [isLoading, setLoading] = useState(false);
   const [platforms, setPlatforms] = useState<Platform[]>([]);
+  const [runs, setRuns] = useState<RunGet[]>([]);
 
   const fetchPlatforms = async () => {
     try {
@@ -52,6 +55,32 @@ export const Platforms: FC = () => {
       setLoading(false);
     }
   };
+
+  // const fetchRuns = async () => {
+  //   try {
+  //     setLoading(true);
+  //     const res = await RunsApiClient.getAllAsync();
+  //     const fetchedRuns = res.map(
+  //       (e: Run): Platform => ({
+  //         id: e.id,
+  //         name: e.name,
+  //         imageUrl: e.imageUrl,
+  //         models: e.models.map(
+  //           (model: ModelModel): Model => ({
+  //             id: model.id,
+  //             name: model.name,
+  //             averageRating: model.averageRating,
+  //           })
+  //         ),
+  //       })
+  //     );
+  //     setLoading(false);
+  //     setPlatforms(fetchedPlatforms);
+  //   } catch (error: any) {
+  //     console.log(error);
+  //     setLoading(false);
+  //   }
+  // };
 
   useEffect(() => {
     fetchPlatforms();

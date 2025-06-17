@@ -9,7 +9,7 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect, useMemo, useState } from "react";
 import "./Prompts.css";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { EmptyTableRow } from "../Common/EmptyTableRow";
@@ -23,6 +23,7 @@ import { DeletePopup } from "../Common/DeletePopup";
 import { useNavigate } from "react-router-dom";
 import SettingsIcon from "@mui/icons-material/Settings";
 import { ExpandableText } from "../Common/ExpandableText";
+import { SearchBar } from "../Common/ColumnSearchBar";
 
 export const Prompts: FC = () => {
   const navigate = useNavigate();
@@ -30,6 +31,8 @@ export const Prompts: FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [openDeletePopup, setOpenDeletePopup] = useState<boolean>(false);
   const [promptToDelete, setPromptToDelete] = useState<Prompt>();
+  const [selectedColumn, setSelectedColumn] = useState<string>("name");
+  const [searchValue, setSearchValue] = useState<string>("");
 
   useEffect(() => {
     fetchPrompts();
@@ -78,6 +81,7 @@ export const Prompts: FC = () => {
     {
       id: "systemMessage",
       label: "System Message",
+      searchable: false,
     },
     {
       id: "userMessage",
@@ -86,10 +90,12 @@ export const Prompts: FC = () => {
     {
       id: "expectedResult",
       label: "Expected Result",
+      searchable: false,
     },
     {
       id: "actions",
       label: "Actions",
+      searchable: false,
     },
   ];
 
@@ -117,6 +123,27 @@ export const Prompts: FC = () => {
       console.log(error);
     }
   };
+
+  const filteredPrompts = useMemo(() => {
+    if (!searchValue.trim()) return prompts;
+
+    const searchTerm = searchValue.toLowerCase().trim();
+
+    return prompts.filter((prompt) => {
+      let fieldValue = "";
+      switch (selectedColumn) {
+        case "name":
+          fieldValue = prompt.name || "";
+          break;
+        case "userMessage":
+          fieldValue = prompt.userMessage || "";
+          break;
+        default:
+          return false;
+      }
+      return fieldValue.toLowerCase().includes(searchTerm);
+    });
+  }, [prompts, selectedColumn, searchValue]);
 
   return (
     <Box
@@ -150,6 +177,15 @@ export const Prompts: FC = () => {
         </IconButton>
       </Box>
 
+      <SearchBar
+        columns={columns}
+        selectedColumn={selectedColumn}
+        searchValue={searchValue}
+        onColumnChange={setSelectedColumn}
+        onSearchChange={setSearchValue}
+        placeholder="Search prompts..."
+      />
+
       <TableContainer
         component={Paper}
         sx={{
@@ -161,8 +197,8 @@ export const Prompts: FC = () => {
         <Table>
           <TableHeader columns={columns} />
           <TableBody>
-            {prompts && prompts.length ? (
-              prompts.map((prompt: Prompt, index: number) => (
+            {filteredPrompts && filteredPrompts.length ? (
+              filteredPrompts.map((prompt: Prompt, index: number) => (
                 <TableRow
                   key={index}
                   hover

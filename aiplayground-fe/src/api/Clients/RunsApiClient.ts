@@ -18,9 +18,9 @@ export const RunsApiClient = {
     );
   },
 
-  async rateAsync(id: number, rating: number): Promise<void> {
+  async rateAsync(id: number, userRating: number): Promise<void> {
     return AiPlaygroundApiClient.patch<void>(`${this.urlPath}/${id}`, {
-      rating,
+      userRating,
     }).then((response) => response.data);
   },
 };
